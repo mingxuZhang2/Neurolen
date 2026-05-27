@@ -242,17 +242,29 @@ def run_token_spatial_encoding(
             X_all = token_activations_per_layer[L]
             X_sel = X_all[keep_act].astype(np.float32)
 
-            for tok in range(n_tokens):
+            # Parallel across tokens using joblib (12 cores → ~10× speedup)
+            def _fit_one_token(tok):
                 X_tok = X_sel[:, tok, :]
                 if final_mode:
                     r_v = _ridge_final_voxelwise(
                         X_tok, Y, n_folds=n_folds, pca_dim=pca_dim)
                 else:
                     r_v = _ridge_fast_voxelwise(X_tok, Y)
-                best_v = int(np.argmax(r_v))
-                best_r[tok, i_l, j] = float(r_v[best_v])
-                best_voxel[tok, i_l, j] = best_v
-                mean_r[tok, i_l, j] = float(r_v.mean())
+                return tok, float(r_v.max()), int(np.argmax(r_v)), float(r_v.mean())
+
+            try:
+                from joblib import Parallel, delayed
+                n_jobs = min(12, n_tokens)
+                results_list = Parallel(n_jobs=n_jobs, prefer="threads")(
+                    delayed(_fit_one_token)(tok) for tok in range(n_tokens)
+                )
+            except ImportError:
+                results_list = [_fit_one_token(tok) for tok in range(n_tokens)]
+
+            for tok, br, bv, mr in results_list:
+                best_r[tok, i_l, j] = br
+                best_voxel[tok, i_l, j] = bv
+                mean_r[tok, i_l, j] = mr
 
             logger.info(
                 f"  layer {L:>2d}  ROI {roi:<6s}  "
