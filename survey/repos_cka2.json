@@ -1,0 +1,25 @@
+[
+  {
+    "name": "ryusudol/Centered-Kernel-Alignment",
+    "url": "https://github.com/ryusudol/Centered-Kernel-Alignment",
+    "clone_url": "https://github.com/ryusudol/Centered-Kernel-Alignment.git",
+    "description": "The Fastest, Memory-efficient Python Library for layer-wise similarity computation between neural network models",
+    "stars": 5,
+    "forks": 0,
+    "language": "Python",
+    "updated": "2026-03-19T13:14:57Z",
+    "license": "MIT",
+    "topics": [
+      "centered-kernel-alignment",
+      "cka",
+      "deep-learning",
+      "machine-learning",
+      "neural-networks",
+      "pytorch",
+      "representation",
+      "similarity"
+    ],
+    "open_issues": 1,
+    "default_branch": "main"
+  }
+]

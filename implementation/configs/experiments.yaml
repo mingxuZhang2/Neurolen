@@ -1,0 +1,116 @@
+# Experiment configurations for NeuroLens
+
+# Global settings
+global:
+  random_seed: 42
+  n_stimuli: 1000        # shared 1000 NSD images
+  n_subjects: 8          # all 8 NSD subjects
+  pca_dim: 256
+  output_dir: "results"
+  log_level: "INFO"
+
+# Paths (override with environment variables or CLI args)
+paths:
+  nsd_root: "/path/to/nsd"           # set via --nsd-root or NSD_ROOT env
+  coco_root: "/path/to/coco"         # set via --coco-root or COCO_ROOT env
+  activations_dir: "activations"
+  brain_data_dir: "brain_data"
+  results_dir: "results"
+  figures_dir: "figures"
+
+# Step 1: Activation extraction
+extraction:
+  models: ["llava", "qwen2vl", "internvl2"]
+  batch_size: 4
+  save_raw: false         # if true, save full activations before PCA
+  pca_dim: 256
+  token_types: ["vis", "txt", "all"]
+  extract_vision_encoder: true
+  prompt_template: "Describe this image in detail."
+
+# Step 2: Brain data processing
+brain_data:
+  subjects: ["subj01", "subj02", "subj03", "subj04",
+             "subj05", "subj06", "subj07", "subj08"]
+  shared_images_only: true
+  roi_groups: ["visual_early", "visual_high", "multimodal_integration", "language_network"]
+  individual_rois: ["V1", "V2", "V3", "V4", "STS", "AG", "Broca", "Wernicke"]
+  rdm_metric: "correlation"     # 1 - Pearson r
+
+# Step 3: RSA analysis
+rsa:
+  comparison_method: "spearman"
+  n_bootstrap: 10000
+  confidence_level: 0.95
+  permutation_n: 5000
+  compute_noise_ceiling: true
+
+# Step 4: CKA analysis
+cka:
+  method: "linear"              # primary
+  supplementary_method: "kernel" # RBF kernel CKA as supplementary
+  kernel_sigma: null             # auto-select if kernel CKA
+  n_bootstrap: 10000
+
+# Step 5: Encoding models
+encoding:
+  method: "ridge"
+  alphas: [0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]
+  n_folds: 5
+  nested_cv: true
+  metric: "pearson_r"           # per-voxel Pearson correlation
+
+# Step 6: Activation patching (causal validation)
+patching:
+  models: ["llava", "qwen2vl", "internvl2"]
+  patch_types: ["mean", "zero"]   # mean primary, zero supplementary
+  n_eval_samples: 500
+  stages:
+    visual:
+      description: "Visual encoding layers"
+      # layer ranges loaded from models.yaml per model
+    fusion:
+      description: "Cross-modal fusion layers"
+    language:
+      description: "Linguistic refinement layers"
+
+# Step 7: Triple dissociation
+dissociation:
+  task_types:
+    visual_recognition:
+      description: "Object identity questions"
+      n_samples: 200
+      metric: "accuracy"
+      prompts:
+        - "What is the main object in this image?"
+        - "What type of object is shown in the center of this image?"
+        - "Identify the primary object visible in this image."
+    cross_modal_binding:
+      description: "Attribute-object binding questions (multi-object scenes)"
+      n_samples: 200
+      metric: "binding_accuracy"
+      prompts:
+        - "What color is the {object}?"
+        - "What is the {attribute} of the {object} on the {position}?"
+    language_generation:
+      description: "Open-ended captioning"
+      n_samples: 200
+      metrics: ["perplexity", "fluency", "grammar_score"]
+      prompts:
+        - "Describe this image in detail."
+        - "Write a comprehensive caption for this image."
+
+# Controls for null hypothesis
+controls:
+  shuffled_layers: true       # randomize layer assignments
+  shuffled_rois: true         # randomize ROI assignments
+  untrained_model: true       # use randomly initialized model
+  n_shuffle_iterations: 1000
+
+# Visualization
+visualization:
+  figsize: [10, 8]
+  dpi: 300
+  format: "pdf"
+  colormap: "RdBu_r"
+  style: "default"            # or "nature" for Nature-series

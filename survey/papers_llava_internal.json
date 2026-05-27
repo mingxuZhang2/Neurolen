@@ -1,0 +1,30 @@
+[
+  {
+    "id": "901b2e5b7ff4905965a07b970e9e0923f8d5afe7",
+    "title": "How Multimodal LLMs Solve Image Tasks: A Lens on Visual Grounding, Task Reasoning, and Answer Decoding",
+    "authors": "Zhuoran Yu, Y. Lee",
+    "year": 2025,
+    "venue": "arXiv.org",
+    "citations": 10,
+    "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated strong performance across a wide range of vision-language tasks, yet their internal processing dynamics remain underexplored. In this work, we introduce a probing framework to systematically analyze how MLLMs process visual and textual inputs across layers. We train linear classifiers to predict fine-grained visual categories (e.g., dog breeds) from token embeddings extracted at each layer, using a standardized anchor question. To uncover the functional roles of different layers, we evaluate these probes under three types of controlled prompt variations: (1) lexical variants that test sensitivity to surface-level changes, (2) semantic negation variants that flip the expected answer by modifying the visual concept in the prompt, and (3) output format variants that preserve reasoning but alter the answer format. Applying our framework to LLaVA-1.5, LLaVA-Next-LLaMA-3, and Qwen2-VL, we identify a consistent stage-wise structure in which early layers perform visual grounding, middle layers support lexical integration and semantic reasoning, and final layers prepare task-specific outputs. We further show that while the overall stage-wise structure remains stable across variations in visual tokenization, instruction tuning data, and pretraining corpus, the specific layer allocation to each stage shifts notably with changes in the base LLM architecture. Our findings provide a unified perspective on the layer-wise organization of MLLMs and offer a lightweight, model-agnostic approach for analyzing multimodal representation dynamics.",
+    "url": "https://www.semanticscholar.org/paper/901b2e5b7ff4905965a07b970e9e0923f8d5afe7",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2508.20279",
+    "arxiv": "2508.20279",
+    "publication_date": "2025-08-27"
+  },
+  {
+    "id": "55d2300cc08e4e0df0d75f9f4a8828891f2dc3a6",
+    "title": "AdaptInfer: Adaptive Token Pruning for Vision-Language Model Inference with Dynamical Text Guidance",
+    "authors": "Weichen Zhang, Zhui Zhu, Ningbo Li et al.",
+    "year": 2025,
+    "venue": "arXiv.org",
+    "citations": 2,
+    "abstract": "Vision-language models (VLMs) have achieved impressive performance on multimodal reasoning tasks such as visual question answering, image captioning and so on, but their inference cost remains a significant challenge due to the large number of vision tokens processed during the prefill stage. Existing pruning methods often rely on directly using the attention patterns or static text prompt guidance, failing to exploit the dynamic internal signals generated during inference. To address these issues, we propose AdaptInfer, a plug-and-play framework for adaptive vision token pruning in VLMs. First, we introduce a fine-grained, dynamic text-guided pruning mechanism that reuses layer-wise text-to-text attention maps to construct soft priors over text-token importance, allowing more informed scoring of vision tokens at each stage. Second, we perform an offline analysis of cross-modal attention shifts and identify consistent inflection locations in inference, which inspire us to propose a more principled and efficient pruning schedule. Our method is lightweight and plug-and-play, also generalizable across multi-modal tasks. Experimental results have verified the effectiveness of the proposed method. For example, it reduces CUDA latency by 61.3% while maintaining an average accuracy of 93.1% on vanilla LLaVA-1.5-7B. Under the same token budget, AdaptInfer surpasses SOTA in accuracy.",
+    "url": "https://www.semanticscholar.org/paper/55d2300cc08e4e0df0d75f9f4a8828891f2dc3a6",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2508.06084",
+    "arxiv": "2508.06084",
+    "publication_date": "2025-08-08"
+  }
+]

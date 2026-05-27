@@ -1,0 +1,144 @@
+# Brain ROI definitions for NeuroLens
+# Using Glasser HCP Multi-Modal Parcellation (MMP 1.0) as primary atlas
+# FreeSurfer Destrieux atlas as backup
+
+# Stage 1: Visual Encoding -> Ventral Visual Stream
+visual_early:
+  description: "Early ventral visual stream (V1-V4)"
+  glasser_parcels:
+    - V1
+    - V2
+    - V3
+    - V4
+  destrieux_labels:
+    - "G_cuneus"
+    - "S_calcarine"
+    - "G_occipital_sup"
+    - "G_occipital_middle"
+  nsd_rois:
+    - "V1v"
+    - "V1d"
+    - "V2v"
+    - "V2d"
+    - "V3v"
+    - "V3d"
+    - "hV4"
+  hemisphere: "both"
+
+# High-level ventral stream (bridges Stage 1 and Stage 2)
+visual_high:
+  description: "High-level ventral stream object areas"
+  glasser_parcels:
+    - FFC       # fusiform face complex
+    - VVC       # ventral visual complex
+    - PIT       # posterior inferotemporal
+    - V8
+  nsd_functional_rois:
+    - "FFA"     # fusiform face area (from localizer)
+    - "PPA"     # parahippocampal place area
+    - "EBA"     # extrastriate body area
+    - "LOC"     # lateral occipital complex
+  hemisphere: "both"
+
+# Stage 2: Cross-Modal Fusion -> Multimodal Integration Network
+multimodal_integration:
+  description: "Multimodal integration regions (STS, AG, TPJ)"
+  glasser_parcels:
+    sts:
+      - STSdp    # STS dorsal posterior
+      - STSda    # STS dorsal anterior
+      - STSvp    # STS ventral posterior
+      - STSva    # STS ventral anterior
+    angular_gyrus:
+      - PGi      # angular gyrus inferior
+      - PGs      # angular gyrus superior
+    tpj:
+      - TPOJ1    # temporo-parietal-occipital junction 1
+      - TPOJ2    # temporo-parietal-occipital junction 2
+      - TPOJ3    # temporo-parietal-occipital junction 3
+  destrieux_labels:
+    - "S_temporal_sup"
+    - "G_pariet_inf-Angular"
+    - "G_temp_sup-Lateral"
+  hemisphere: "both"
+
+# Stage 3: Linguistic Refinement -> Language Network
+language_network:
+  description: "Left-lateralized language network (Broca's + Wernicke's + IFG)"
+  glasser_parcels:
+    broca:
+      - "44"     # pars opercularis
+      - "45"     # pars triangularis
+    wernicke:
+      - A4       # auditory area 4
+      - A5       # auditory area 5
+      - PSL      # perisylvian language area
+    ifg_extended:
+      - IFJa     # inferior frontal junction anterior
+      - IFJp     # inferior frontal junction posterior
+      - IFSa     # inferior frontal sulcus anterior
+      - IFSp     # inferior frontal sulcus posterior
+  destrieux_labels:
+    - "G_front_inf-Opercular"
+    - "G_front_inf-Triangul"
+    - "G_temp_sup-Lateral"   # posterior portion only
+  hemisphere: "left"
+
+# Aggregate ROI groups for analysis
+roi_groups:
+  visual_early:
+    stage: 1
+    label: "V1-V4"
+  visual_high:
+    stage: 1.5
+    label: "FFA/PPA/LOC"
+  multimodal_integration:
+    stage: 2
+    label: "STS/AG/TPJ"
+  language_network:
+    stage: 3
+    label: "Broca/Wernicke"
+
+# Individual ROIs for fine-grained analysis (H5)
+individual_rois:
+  V1:
+    glasser: ["V1"]
+    expected_peak_stage: 1
+    expected_peak_layer_range: [0, 3]
+  V2:
+    glasser: ["V2"]
+    expected_peak_stage: 1
+    expected_peak_layer_range: [2, 5]
+  V3:
+    glasser: ["V3"]
+    expected_peak_stage: 1
+    expected_peak_layer_range: [4, 7]
+  V4:
+    glasser: ["V4"]
+    expected_peak_stage: 1
+    expected_peak_layer_range: [6, 10]
+  STS:
+    glasser: ["STSdp", "STSda", "STSvp", "STSva"]
+    expected_peak_stage: 2
+  AG:
+    glasser: ["PGi", "PGs"]
+    expected_peak_stage: 2
+  Broca:
+    glasser: ["44", "45"]
+    expected_peak_stage: 3
+    hemisphere: "left"
+  Wernicke:
+    glasser: ["A4", "A5", "PSL"]
+    expected_peak_stage: 3
+    hemisphere: "left"
+
+# NSD data paths (relative to NSD root)
+nsd_paths:
+  betas: "nsddata_betas/ppdata/{subject}/func1pt8mm/betas_fithrf_GLMdenoise_RR/"
+  roi_dir: "nsddata/ppdata/{subject}/func1pt8mm/roi/"
+  stim_info: "nsddata/experiments/nsd/nsd_stim_info_merged.csv"
+  expdesign: "nsddata/experiments/nsd/nsd_expdesign.csv"
+  glasser_lh: "nsddata/freesurfer/{subject}/label/lh.HCP_MMP1.mgz"
+  glasser_rh: "nsddata/freesurfer/{subject}/label/rh.HCP_MMP1.mgz"
+  visual_rois: "nsddata/ppdata/{subject}/func1pt8mm/roi/prf-visualrois.nii.gz"
+  general_roi: "nsddata/ppdata/{subject}/func1pt8mm/roi/nsdgeneral.nii.gz"

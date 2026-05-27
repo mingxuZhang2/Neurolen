@@ -1,0 +1,61 @@
+models:
+  llava:
+    name: "LLaVA-1.5-7B"
+    hf_id: "liuhaotian/llava-v1.5-7b"
+    n_layers: 32
+    hidden_dim: 4096
+    stages:
+      visual: [0, 10]
+      fusion: [11, 22]
+      language: [23, 31]
+    activation_hook_prefix: "language_model.layers"
+    vision_encoder:
+      type: "clip"
+      n_layers: 24
+      extract_layers: [0, 6, 12, 18, 23]
+    processor_class: "AutoProcessor"
+    model_class: "LlavaForConditionalGeneration"
+
+  qwen2vl:
+    name: "Qwen2-VL-7B"
+    hf_id: "Qwen/Qwen2-VL-7B-Instruct"
+    n_layers: 28
+    hidden_dim: 3584
+    stages:
+      visual: [0, 9]
+      fusion: [10, 19]
+      language: [20, 27]
+    activation_hook_prefix: "model.layers"
+    vision_encoder:
+      type: "qwen_vit"
+      n_layers: 32
+      extract_layers: [0, 8, 16, 24, 31]
+    processor_class: "AutoProcessor"
+    model_class: "Qwen2VLForConditionalGeneration"
+
+  internvl2:
+    name: "InternVL2-8B"
+    hf_id: "OpenGVLab/InternVL2-8B"
+    n_layers: 32
+    hidden_dim: 4096
+    stages:
+      visual: [0, 10]
+      fusion: [11, 22]
+      language: [23, 31]
+    activation_hook_prefix: "language_model.model.layers"
+    vision_encoder:
+      type: "intern_vit"
+      n_layers: 24
+      extract_layers: [0, 6, 12, 18, 23]
+    processor_class: "AutoTokenizer"
+    model_class: "AutoModel"
+
+# PCA reduction dimension for all models
+pca_dim: 256
+
+# Batch size for activation extraction (adjust based on GPU memory)
+extraction_batch_size: 4
+
+# Default device
+device: "cuda"
+dtype: "float16"

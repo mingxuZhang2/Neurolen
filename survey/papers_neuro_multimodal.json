@@ -1,0 +1,30 @@
+[
+  {
+    "id": "d37fbf63d7a0f7ced6ef05a9cd1288ef782418af",
+    "title": "Understanding the Limits of Vision Language Models Through the Lens of the Binding Problem",
+    "authors": "Declan Campbell, Sunayana Rane, Tyler Giallanza et al.",
+    "year": 2024,
+    "venue": "Neural Information Processing Systems",
+    "citations": 69,
+    "abstract": "Recent work has documented striking heterogeneity in the performance of state-of-the-art vision language models (VLMs), including both multimodal language models and text-to-image models. These models are able to describe and generate a diverse array of complex, naturalistic images, yet they exhibit surprising failures on basic multi-object reasoning tasks -- such as counting, localization, and simple forms of visual analogy -- that humans perform with near perfect accuracy. To better understand this puzzling pattern of successes and failures, we turn to theoretical accounts of the binding problem in cognitive science and neuroscience, a fundamental problem that arises when a shared set of representational resources must be used to represent distinct entities (e.g., to represent multiple objects in an image), necessitating the use of serial processing to avoid interference. We find that many of the puzzling failures of state-of-the-art VLMs can be explained as arising due to the binding problem, and that these failure modes are strikingly similar to the limitations exhibited by rapid, feedforward processing in the human brain.",
+    "url": "https://www.semanticscholar.org/paper/d37fbf63d7a0f7ced6ef05a9cd1288ef782418af",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2411.00238",
+    "arxiv": "2411.00238",
+    "publication_date": "2024-10-31"
+  },
+  {
+    "id": "03db5b4d3f16fd9c36fcfe467044fd8c006b175a",
+    "title": "Neuro-Vision to Language: Enhancing Brain Recording-based Visual Reconstruction and Language Interaction",
+    "authors": "Guobin Shen, Dongcheng Zhao, Xiang He et al.",
+    "year": 2024,
+    "venue": "Neural Information Processing Systems",
+    "citations": 21,
+    "abstract": "Decoding non-invasive brain recordings is pivotal for advancing our understanding of human cognition but faces challenges due to individual differences and complex neural signal representations. Traditional methods often require customized models and extensive trials, lacking interpretability in visual reconstruction tasks. Our framework integrates 3D brain structures with visual semantics using a Vision Transformer 3D. This unified feature extractor efficiently aligns fMRI features with multiple levels of visual embeddings, eliminating the need for subject-specific models and allowing extraction from single-trial data. The extractor consolidates multi-level visual features into one network, simplifying integration with Large Language Models (LLMs). Additionally, we have enhanced the fMRI dataset with diverse fMRI-image-related textual data to support multimodal large model development. Integrating with LLMs enhances decoding capabilities, enabling tasks such as brain captioning, complex reasoning, concept localization, and visual reconstruction. Our approach demonstrates superior performance across these tasks, precisely identifying language-based concepts within brain signals, enhancing interpretability, and providing deeper insights into neural processes. These advances significantly broaden the applicability of non-invasive brain decoding in neuroscience and human-computer interaction, setting the stage for advanced brain-computer interfaces and cognitive models.",
+    "url": "https://www.semanticscholar.org/paper/03db5b4d3f16fd9c36fcfe467044fd8c006b175a",
+    "pdf": "",
+    "doi": "10.52202/079017-3113",
+    "arxiv": "2404.19438",
+    "publication_date": "2024-04-30"
+  }
+]

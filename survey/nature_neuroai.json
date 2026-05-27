@@ -1,0 +1,167 @@
+[
+  {
+    "title": "Transforming psychiatry with computational and brain-based methods",
+    "year": 2025,
+    "venue": "Nature Comp Sci",
+    "full_venue": "Nature Computational Science",
+    "abstract": "Integrating computational methods with brain-based data presents a path to precision psychiatry by capturing individual neurobiological variation, improving diagnosis, prognosis, and personalized care. This Viewpoint highlights advances in normative and foundation models, the importance of clinically grounded principles, and the role of robust measurement and interpretability in progressing mental health care.",
+    "url": "https://www.nature.com/articles/s43588-025-00884-9",
+    "publication_date": "10 Oct 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Future directions in human mobility science",
+    "year": 2023,
+    "venue": "Nature Comp Sci",
+    "full_venue": "Nature Computational Science",
+    "abstract": "The field of human mobility has evolved drastically in the past 20 years. In this Perspective, the authors discuss three key areas in human mobility, framed as minds, societies and algorithms, where they expect to see substantial improvements in the future.",
+    "url": "https://www.nature.com/articles/s43588-023-00469-4",
+    "publication_date": "03 Jul 2023",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Temporal structure of natural language processing in the human brain corresponds to layered hierarchy of large language models",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "The way in which the brain processes language from a collection of sounds to meaningful concepts remains poorly understood. Here, the authors show that the brain’s temporal responses to speech closely follow the layer-by-layer progression of LLMs, revealing shared computational principles.",
+    "url": "https://www.nature.com/articles/s41467-025-65518-0",
+    "publication_date": "26 Nov 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Cellular and molecular associations with intrinsic brain organization",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "This study shows that the brain’s intrinsic functional organization mirrors its cellular and molecular architecture, linking cell types, neurotransmitters, and mitochondria to large-scale brain organization and cognition.",
+    "url": "https://www.nature.com/articles/s41467-025-66291-w",
+    "publication_date": "26 Nov 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Explore brain-inspired machine intelligence for connecting dots on graphs through holographic blueprint of oscillatory synchronization",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "Neural coupling is a challenge in understanding both brain function and advancing machine intelligence. Here, the authors introduce HoloBrain and HoloGraph, a brain-inspired framework that models oscillatory synchronization to overcome limitations of graph neural networks and enable more efficient, robust learning.",
+    "url": "https://www.nature.com/articles/s41467-025-64471-2",
+    "publication_date": "24 Oct 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Data-driven fine-grained region discovery in the mouse brain with transformers",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "Defining the spatial organization of tissues and organs like the brain from large datasets is a major challenge. Here, authors introduce CellTransformer, an AI tool that defines spatial domains in the mouse brain based on spatial transcriptomics, a technology that measures which genes are active in different parts of tissue.",
+    "url": "https://www.nature.com/articles/s41467-025-64259-4",
+    "publication_date": "07 Oct 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Social exposome and brain health outcomes of dementia across Latin America",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "The social exposome—lifelong social and economic adversity—can shape brain health and dementia risk. Here, the authors show that an adverse social exposome is linked to poorer clinical, cognitive, and brain changes in Latin American older adults.",
+    "url": "https://www.nature.com/articles/s41467-025-63277-6",
+    "publication_date": "11 Sept 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Current challenges and future directions for brain age prediction in children and adolescents",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "This Perspective outlines how brain-age prediction models are increasingly applied to child and adolescent populations and examines the specific challenges this entails. It offers practical recommendations and future directions for future research in the field.",
+    "url": "https://www.nature.com/articles/s41467-025-63222-7",
+    "publication_date": "20 Aug 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Gene transcription, neurotransmitter, and neurocognition signatures of brain structural-functional coupling variability",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "Temporal variability of structural-functional coupling (SFC) remains poorly understood. Here, authors show such variability is underpinned by specific transcriptomic and chemoarchitectural signatures, thereby supporting neurocognitive specialization.",
+    "url": "https://www.nature.com/articles/s41467-025-63000-5",
+    "publication_date": "15 Aug 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Longitudinal changes in brain asymmetry track lifestyle and disease",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "Using 1,425 UK Biobank participants, we show for the first time that morphological brain asymmetry exhibits evidence of plasticity changes throughout adulthood, which tracks individual variation ~1,000 lifestyle factors and ~4,500 disease ICD codes.",
+    "url": "https://www.nature.com/articles/s41467-025-60451-8",
+    "publication_date": "01 Jul 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "A network correspondence toolbox for quantitative evaluation of novel neuroimaging results",
+    "year": 2025,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "Here, the authors present the Network Correspondence Toolbox, which enables researchers to examine and report spatial correspondence between their neuroimaging results and widely used brain atlases.",
+    "url": "https://www.nature.com/articles/s41467-025-58176-9",
+    "publication_date": "25 Mar 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Frontoparietal network topology as a neural marker of musical perceptual abilities",
+    "year": 2024,
+    "venue": "Nature Comm",
+    "full_venue": "Nature Communications",
+    "abstract": "Here, the authors show through an analysis of brain scans from over 200 non-musicians that individuals with an efficiently organized network connecting frontal and parietal regions, critical for working memory, tend to have better musical perceptual abilities.",
+    "url": "https://www.nature.com/articles/s41467-024-52479-z",
+    "publication_date": "17 Sept 2024",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "What neuroscience can tell AI about learning in continuously changing environments",
+    "year": 2025,
+    "venue": "Nature MI",
+    "full_venue": "Nature Machine Intelligence",
+    "abstract": "Durstewitz et al. explore what artificial intelligence can learn from the brain’s ability to adjust quickly to changing environments. By linking neuroscience studies of flexible behaviour with advances in continual and in-context learning, this Perspective outlines ways to strengthen the exchange of ideas between the two fields and advance NeuroAI.",
+    "url": "https://www.nature.com/articles/s42256-025-01146-z",
+    "publication_date": "28 Nov 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Human-like object concept representations emerge naturally in multimodal large language models",
+    "year": 2025,
+    "venue": "Nature MI",
+    "full_venue": "Nature Machine Intelligence",
+    "abstract": "Multimodal large language models are shown to develop object concept representations similar to those of humans. These representations closely align with neural activity in brain regions involved in object recognition, revealing similarities between artificial intelligence and human cognition.",
+    "url": "https://www.nature.com/articles/s42256-025-01049-z",
+    "publication_date": "09 Jun 2025",
+    "citations": null,
+    "source": "Nature Official"
+  },
+  {
+    "title": "Better models of human high-level visual cortex emerge from natural language supervision with a large and diverse dataset",
+    "year": 2023,
+    "venue": "Nature MI",
+    "full_venue": "Nature Machine Intelligence",
+    "abstract": "Prediction of high-level visual representations in the human brain may benefit from multimodal sources in network training and the incorporation of complex datasets. Wang and colleagues show that language pretraining and a large, diverse dataset together build better models of higher-level visual cortex compared to earlier models.",
+    "url": "https://www.nature.com/articles/s42256-023-00753-y",
+    "publication_date": "13 Nov 2023",
+    "citations": null,
+    "source": "Nature Official"
+  }
+]

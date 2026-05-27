@@ -1,0 +1,442 @@
+[
+  {
+    "arxiv_id": "2011.11052",
+    "title": "Efficient embedding network for 3D brain tumor segmentation",
+    "authors": "Hicham Messaoudi, Ahror Belaid, Mohamed Lamine Allaoui et al.",
+    "year": 2020,
+    "published": "2020-11-22T16:17:29Z",
+    "abstract": "3D medical image processing with deep learning greatly suffers from a lack of data. Thus, studies carried out in this field are limited compared to works related to 2D natural image analysis, where very large datasets exist. As a result, powerful and efficient 2D convolutional neural networks have been developed and trained. In this paper, we investigate a way to transfer the performance of a two-dimensional classiffication network for the purpose of three-dimensional semantic segmentation of brain tumors. We propose an asymmetric U-Net network by incorporating the EfficientNet model as part of the encoding branch. As the input data is in 3D, the first layers of the encoder are devoted to the reduction of the third dimension in order to fit the input of the EfficientNet network. Experimental results on validation and test data from the BraTS 2020 challenge demonstrate that the proposed method achieve promising performance.",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2011.11052v1",
+    "url": "http://arxiv.org/abs/2011.11052v1"
+  },
+  {
+    "arxiv_id": "2509.23896",
+    "title": "A Computational Perspective on NeuroAI and Synthetic Biological Intelligence",
+    "authors": "Dhruvik Patel, Md Sayed Tanveer, Jesus Gonzalez-Ferrer et al.",
+    "year": 2025,
+    "published": "2025-09-28T14:05:27Z",
+    "abstract": "NeuroAI is an emerging field at the intersection of neuroscience and artificial intelligence, where insights from brain function guide the design of intelligent systems. A central area within this field is synthetic biological intelligence (SBI), which combines the adaptive learning properties of biological neural networks with engineered hardware and software. SBI systems provide a platform for modeling neural computation, developing biohybrid architectures, and enabling new forms of embodied intelligence. In this review, we organize the NeuroAI landscape into three interacting domains: hardware, software, and wetware. We outline computational frameworks that integrate biological and non-biological systems and highlight recent advances in organoid intelligence, neuromorphic computing, and neuro-symbolic learning. These developments collectively point toward a new class of systems that compute through interactions between living neural tissue and digital algorithms.",
+    "categories": [
+      "q-bio.NC",
+      "cs.ET",
+      "cs.NE"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2509.23896v2",
+    "url": "http://arxiv.org/abs/2509.23896v2"
+  },
+  {
+    "arxiv_id": "2305.12248",
+    "title": "Brain encoding models based on multimodal transformers can transfer across language and vision",
+    "authors": "Jerry Tang, Meng Du, Vy A. Vo et al.",
+    "year": 2023,
+    "published": "2023-05-20T17:38:44Z",
+    "abstract": "Encoding models have been used to assess how the human brain represents concepts in language and vision. While language and vision rely on similar concept representations, current encoding models are typically trained and tested on brain responses to each modality in isolation. Recent advances in multimodal pretraining have produced transformers that can extract aligned representations of concepts in language and vision. In this work, we used representations from multimodal transformers to train encoding models that can transfer across fMRI responses to stories and movies. We found that encoding models trained on brain responses to one modality can successfully predict brain responses to the other modality, particularly in cortical regions that represent conceptual meaning. Further analysis of these encoding models revealed shared semantic dimensions that underlie concept representations in language and vision. Comparing encoding models trained using representations from multimodal and unimodal transformers, we found that multimodal transformers learn more aligned representations of concepts in language and vision. Our results demonstrate how multimodal transformers can provide insights into the brain's capacity for multimodal processing.",
+    "categories": [
+      "cs.CL",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2305.12248v1",
+    "url": "http://arxiv.org/abs/2305.12248v1"
+  },
+  {
+    "arxiv_id": "2306.13549",
+    "title": "A Survey on Multimodal Large Language Models",
+    "authors": "Shukang Yin, Chaoyou Fu, Sirui Zhao et al.",
+    "year": 2023,
+    "published": "2023-06-23T15:21:52Z",
+    "abstract": "Recently, Multimodal Large Language Model (MLLM) represented by GPT-4V has been a new rising research hotspot, which uses powerful Large Language Models (LLMs) as a brain to perform multimodal tasks. The surprising emergent capabilities of MLLM, such as writing stories based on images and OCR-free math reasoning, are rare in traditional multimodal methods, suggesting a potential path to artificial general intelligence. To this end, both academia and industry have endeavored to develop MLLMs that can compete with or even better than GPT-4V, pushing the limit of research at a surprising speed. In this paper, we aim to trace and summarize the recent progress of MLLMs. First of all, we present the basic formulation of MLLM and delineate its related concepts, including architecture, training strategy and data, as well as evaluation. Then, we introduce research topics about how MLLMs can be extended to support more granularity, modalities, languages, and scenarios. We continue with multimodal hallucination and extended techniques, including Multimodal ICL (M-ICL), Multimodal CoT (M-CoT), and LLM-Aided Visual Reasoning (LAVR). To conclude the paper, we discuss existing challenges and point out promising research directions. In light of the fact that the era of MLLM has only just begun, we will keep updating this survey and hope it can inspire more research. An associated GitHub link collecting the latest papers is available at https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models.",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2306.13549v4",
+    "url": "http://arxiv.org/abs/2306.13549v4"
+  },
+  {
+    "arxiv_id": "1706.06749",
+    "title": "Cross-language Learning with Adversarial Neural Networks: Application to Community Question Answering",
+    "authors": "Shafiq Joty, Preslav Nakov, Lluís Màrquez et al.",
+    "year": 2017,
+    "published": "2017-06-21T06:11:59Z",
+    "abstract": "We address the problem of cross-language adaptation for question-question similarity reranking in community question answering, with the objective to port a system trained on one input language to another input language given labeled training data for the first language and only unlabeled data for the second language. In particular, we propose to use adversarial training of neural networks to learn high-level features that are discriminative for the main learning task, and at the same time are invariant across the input languages. The evaluation results show sizable improvements for our cross-language adversarial neural network (CLANN) model over a strong non-adversarial system.",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1706.06749v1",
+    "url": "http://arxiv.org/abs/1706.06749v1"
+  },
+  {
+    "arxiv_id": "2308.12898",
+    "title": "Can Linguistic Knowledge Improve Multimodal Alignment in Vision-Language Pretraining?",
+    "authors": "Fei Wang, Liang Ding, Jun Rao et al.",
+    "year": 2023,
+    "published": "2023-08-24T16:17:40Z",
+    "abstract": "The multimedia community has shown a significant interest in perceiving and representing the physical world with multimodal pretrained neural network models, and among them, the visual-language pertaining (VLP) is, currently, the most captivating topic. However, there have been few endeavors dedicated to the exploration of 1) whether essential linguistic knowledge (e.g., semantics and syntax) can be extracted during VLP, and 2) how such linguistic knowledge impact or enhance the multimodal alignment. In response, here we aim to elucidate the impact of comprehensive linguistic knowledge, including semantic expression and syntactic structure, on multimodal alignment. Specifically, we design and release the SNARE, the first large-scale multimodal alignment probing benchmark, to detect the vital linguistic components, e.g., lexical, semantic, and syntax knowledge, containing four tasks: Semantic structure, Negation logic, Attribute ownership, and Relationship composition. Based on our proposed probing benchmarks, our holistic analyses of five advanced VLP models illustrate that the VLP model: i) shows insensitivity towards complex syntax structures and relies on content words for sentence comprehension; ii) demonstrates limited comprehension of combinations between sentences and negations; iii) faces challenges in determining the presence of actions or spatial relationships within visual information and struggles with verifying the correctness of triple combinations. We make our benchmark and code available at \\url{https://github.com/WangFei-2019/SNARE/}.",
+    "categories": [
+      "cs.MM",
+      "cs.AI",
+      "cs.CL",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2308.12898v2",
+    "url": "http://arxiv.org/abs/2308.12898v2"
+  },
+  {
+    "arxiv_id": "2406.14481",
+    "title": "Revealing Vision-Language Integration in the Brain with Multimodal Networks",
+    "authors": "Vighnesh Subramaniam, Colin Conwell, Christopher Wang et al.",
+    "year": 2024,
+    "published": "2024-06-20T16:43:22Z",
+    "abstract": "We use (multi)modal deep neural networks (DNNs) to probe for sites of multimodal integration in the human brain by predicting stereoencephalography (SEEG) recordings taken while human subjects watched movies. We operationalize sites of multimodal integration as regions where a multimodal vision-language model predicts recordings better than unimodal language, unimodal vision, or linearly-integrated language-vision models. Our target DNN models span different architectures (e.g., convolutional networks and transformers) and multimodal training techniques (e.g., cross-attention and contrastive learning). As a key enabling step, we first demonstrate that trained vision and language models systematically outperform their randomly initialized counterparts in their ability to predict SEEG signals. We then compare unimodal and multimodal models against one another. Because our target DNN models often have different architectures, number of parameters, and training sets (possibly obscuring those differences attributable to integration), we carry out a controlled comparison of two models (SLIP and SimCLR), which keep all of these attributes the same aside from input modality. Using this approach, we identify a sizable number of neural sites (on average 141 out of 1090 total sites or 12.94%) and brain regions where multimodal integration seems to occur. Additionally, we find that among the variants of multimodal training techniques we assess, CLIP-style training is the best suited for downstream prediction of the neural activity in these sites.",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.NE",
+      "q-bio.NC"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2406.14481v1",
+    "url": "http://arxiv.org/abs/2406.14481v1"
+  },
+  {
+    "arxiv_id": "2605.17152",
+    "title": "Multilingual and Multimodal LLMs in the Wild: Building for Low-Resource Languages",
+    "authors": "Firoj Alam, Shammur Absar Chowdhury, Enamul Hoque Prince",
+    "year": 2026,
+    "published": "2026-05-16T20:56:15Z",
+    "abstract": "Multimodal LLMs are evolving from vision-language to tri-modality that see, hear, and read, yet pipelines and benchmarks remain English-centric and compute-heavy. The tutorial offers an overview of this emerging research area for multilingual multimodality across text, speech, and vision under limited data/compute budgets, synthesizing foundations, recent multilingual models (PALO, Maya), speech-text LLMs. We cover low-cost data creation/curation; adapter stacks for tri-modal alignment; culture-aware evaluation beyond English and hands on resources for fine-tuning a compact multilingual VLM and wiring a speech->text->LLM pipeline. The content will be delivered as an interactive half-day tutorial, designed for researchers and practitioners working on multilingual, multimodal AI in low-resource language settings.",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.17152v1",
+    "url": "http://arxiv.org/abs/2605.17152v1"
+  },
+  {
+    "arxiv_id": "2502.01654",
+    "title": "Predicting concentration levels of air pollutants by transfer learning and recurrent neural network",
+    "authors": "Iat Hang Fong, Tengyue Li, Simon Fong et al.",
+    "year": 2025,
+    "published": "2025-01-30T23:39:19Z",
+    "abstract": "Air pollution (AP) poses a great threat to human health, and people are paying more attention than ever to its prediction. Accurate prediction of AP helps people to plan for their outdoor activities and aids protecting human health. In this paper, long-short term memory (LSTM) recurrent neural networks (RNNs) have been used to predict the future concentration of air pollutants (APS) in Macau. Additionally, meteorological data and data on the concentration of APS have been utilized. Moreover, in Macau, some air quality monitoring stations (AQMSs) have less observed data in quantity, and, at the same time, some AQMSs recorded less observed data of certain types of APS. Therefore, the transfer learning and pre-trained neural networks have been employed to assist AQMSs with less observed data to build a neural network with high prediction accuracy. The experimental sample covers a period longer than 12-year and includes daily measurements from several APS as well as other more classical meteorological values. Records from five stations, four out of them are AQMSs and the remaining one is an automatic weather station, have been prepared from the aforesaid period and eventually underwent to computational intelligence techniques to build and extract a prediction knowledge-based system. As shown by experimentation, LSTM RNNs initialized with transfer learning methods have higher prediction accuracy; it incurred shorter training time than randomly initialized recurrent neural networks.",
+    "categories": [
+      "cs.LG",
+      "cs.NE",
+      "physics.ao-ph"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2502.01654v1",
+    "url": "http://arxiv.org/abs/2502.01654v1"
+  },
+  {
+    "arxiv_id": "2508.19294",
+    "title": "Object Detection with Multimodal Large Vision-Language Models: An In-depth Review",
+    "authors": "Ranjan Sapkota, Manoj Karkee",
+    "year": 2025,
+    "published": "2025-08-25T17:21:00Z",
+    "abstract": "The fusion of language and vision in large vision-language models (LVLMs) has revolutionized deep learning-based object detection by enhancing adaptability, contextual reasoning, and generalization beyond traditional architectures. This in-depth review presents a structured exploration of the state-of-the-art in LVLMs, systematically organized through a three-step research review process. First, we discuss the functioning of vision language models (VLMs) for object detection, describing how these models harness natural language processing (NLP) and computer vision (CV) techniques to revolutionize object detection and localization. We then explain the architectural innovations, training paradigms, and output flexibility of recent LVLMs for object detection, highlighting how they achieve advanced contextual understanding for object detection. The review thoroughly examines the approaches used in integration of visual and textual information, demonstrating the progress made in object detection using VLMs that facilitate more sophisticated object detection and localization strategies. This review presents comprehensive visualizations demonstrating LVLMs' effectiveness in diverse scenarios including localization and segmentation, and then compares their real-time performance, adaptability, and complexity to traditional deep learning systems. Based on the review, its is expected that LVLMs will soon meet or surpass the performance of conventional methods in object detection. The review also identifies a few major limitations of the current LVLM modes, proposes solutions to address those challenges, and presents a clear roadmap for the future advancement in this field. We conclude, based on this study, that the recent advancement in LVLMs have made and will continue to make a transformative impact on object detection and robotic applications in the future.",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2508.19294v2",
+    "url": "http://arxiv.org/abs/2508.19294v2"
+  },
+  {
+    "arxiv_id": "2311.07766",
+    "title": "Vision-Language Integration in Multimodal Video Transformers (Partially) Aligns with the Brain",
+    "authors": "Dota Tianai Dong, Mariya Toneva",
+    "year": 2023,
+    "published": "2023-11-13T21:32:37Z",
+    "abstract": "Integrating information from multiple modalities is arguably one of the essential prerequisites for grounding artificial intelligence systems with an understanding of the real world. Recent advances in video transformers that jointly learn from vision, text, and sound over time have made some progress toward this goal, but the degree to which these models integrate information from modalities still remains unclear. In this work, we present a promising approach for probing a pre-trained multimodal video transformer model by leveraging neuroscientific evidence of multimodal information processing in the brain. Using brain recordings of participants watching a popular TV show, we analyze the effects of multi-modal connections and interactions in a pre-trained multi-modal video transformer on the alignment with uni- and multi-modal brain regions. We find evidence that vision enhances masked prediction performance during language processing, providing support that cross-modal representations in models can benefit individual modalities. However, we don't find evidence of brain-relevant information captured by the joint multi-modal transformer representations beyond that captured by all of the individual modalities. We finally show that the brain alignment of the pre-trained joint representation can be improved by fine-tuning using a task that requires vision-language inferences. Overall, our results paint an optimistic picture of the ability of multi-modal transformers to integrate vision and language in partially brain-relevant ways but also show that improving the brain alignment of these models may require new approaches.",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2311.07766v1",
+    "url": "http://arxiv.org/abs/2311.07766v1"
+  },
+  {
+    "arxiv_id": "2202.09061",
+    "title": "VLP: A Survey on Vision-Language Pre-training",
+    "authors": "Feilong Chen, Duzhen Zhang, Minglun Han et al.",
+    "year": 2022,
+    "published": "2022-02-18T07:54:02Z",
+    "abstract": "In the past few years, the emergence of pre-training models has brought uni-modal fields such as computer vision (CV) and natural language processing (NLP) to a new era. Substantial works have shown they are beneficial for downstream uni-modal tasks and avoid training a new model from scratch. So can such pre-trained models be applied to multi-modal tasks? Researchers have explored this problem and made significant progress. This paper surveys recent advances and new frontiers in vision-language pre-training (VLP), including image-text and video-text pre-training. To give readers a better overall grasp of VLP, we first review its recent advances from five aspects: feature extraction, model architecture, pre-training objectives, pre-training datasets, and downstream tasks. Then, we summarize the specific VLP models in detail. Finally, we discuss the new frontiers in VLP. To the best of our knowledge, this is the first survey focused on VLP. We hope that this survey can shed light on future research in the VLP field.",
+    "categories": [
+      "cs.CV",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2202.09061v4",
+    "url": "http://arxiv.org/abs/2202.09061v4"
+  },
+  {
+    "arxiv_id": "2011.02840",
+    "title": "DR-Unet104 for Multimodal MRI brain tumor segmentation",
+    "authors": "Jordan Colman, Lei Zhang, Wenting Duan et al.",
+    "year": 2020,
+    "published": "2020-11-04T01:24:26Z",
+    "abstract": "In this paper we propose a 2D deep residual Unet with 104 convolutional layers (DR-Unet104) for lesion segmentation in brain MRIs. We make multiple additions to the Unet architecture, including adding the 'bottleneck' residual block to the Unet encoder and adding dropout after each convolution block stack. We verified the effect of introducing the regularisation of dropout with small rate (e.g. 0.2) on the architecture, and found a dropout of 0.2 improved the overall performance compared to no dropout, or a dropout of 0.5. We evaluated the proposed architecture as part of the Multimodal Brain Tumor Segmentation (BraTS) 2020 Challenge and compared our method to DeepLabV3+ with a ResNet-V2-152 backbone. We found that the DR-Unet104 achieved a mean dice score coefficient of 0.8862, 0.6756 and 0.6721 for validation data, whole tumor, enhancing tumor and tumor core respectively, an overall improvement on 0.8770, 0.65242 and 0.68134 achieved by DeepLabV3+. Our method produced a final mean DSC of 0.8673, 0.7514 and 0.7983 on whole tumor, enhancing tumor and tumor core on the challenge's testing data. We produced a competitive lesion segmentation architecture, despite only 2D convolutions, having the added benefit that it can be used on lower power computers than a 3D architecture. The source code and trained model for this work is openly available at https://github.com/jordan-colman/DR-Unet104.",
+    "categories": [
+      "eess.IV",
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2011.02840v2",
+    "url": "http://arxiv.org/abs/2011.02840v2"
+  },
+  {
+    "arxiv_id": "2604.00086",
+    "title": "Hierarchical Pre-Training of Vision Encoders with Large Language Models",
+    "authors": "Eugene Lee, Ting-Yu Chang, Jui-Huang Tsai et al.",
+    "year": 2026,
+    "published": "2026-03-31T18:00:39Z",
+    "abstract": "The field of computer vision has experienced significant advancements through scalable vision encoders and multimodal pre-training frameworks. However, existing approaches often treat vision encoders and large language models (LLMs) as independent modules, limiting the integration of hierarchical visual features. In this work, we propose HIVE (Hierarchical Pre-Training of Vision Encoders), a novel framework that enhances vision-language alignment by introducing hierarchical cross-attention between the vision encoder and LLM. Unlike conventional methods that flatten image embeddings, HIVE enables structured feature fusion across multiple layers, improving gradient flow and representation learning. To optimize this interaction, we introduce a three-stage training strategy that progressively aligns the vision encoder with the LLM, ensuring stable optimization and effective multimodal fusion. Empirical evaluations demonstrate that HIVE achieves superior performance not only in image classification but also on various vision-language tasks, outperforming self-attention-based methods in benchmarks such as MME, GQA, OK-VQA, and ScienceQA. Our results highlight the benefits of hierarchical feature integration, paving the way for more efficient and expressive vision-language models.",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2604.00086v1",
+    "url": "http://arxiv.org/abs/2604.00086v1"
+  },
+  {
+    "arxiv_id": "2308.14179",
+    "title": "Towards Vision-Language Mechanistic Interpretability: A Causal Tracing Tool for BLIP",
+    "authors": "Vedant Palit, Rohan Pandey, Aryaman Arora et al.",
+    "year": 2023,
+    "published": "2023-08-27T18:46:47Z",
+    "abstract": "Mechanistic interpretability seeks to understand the neural mechanisms that enable specific behaviors in Large Language Models (LLMs) by leveraging causality-based methods. While these approaches have identified neural circuits that copy spans of text, capture factual knowledge, and more, they remain unusable for multimodal models since adapting these tools to the vision-language domain requires considerable architectural changes. In this work, we adapt a unimodal causal tracing tool to BLIP to enable the study of the neural mechanisms underlying image-conditioned text generation. We demonstrate our approach on a visual question answering dataset, highlighting the causal relevance of later layer representations for all tokens. Furthermore, we release our BLIP causal tracing tool as open source to enable further experimentation in vision-language mechanistic interpretability by the community. Our code is available at https://github.com/vedantpalit/Towards-Vision-Language-Mechanistic-Interpretability.",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2308.14179v1",
+    "url": "http://arxiv.org/abs/2308.14179v1"
+  },
+  {
+    "arxiv_id": "2301.09245",
+    "title": "Towards NeuroAI: Introducing Neuronal Diversity into Artificial Neural Networks",
+    "authors": "Feng-Lei Fan, Yingxin Li, Hanchuan Peng et al.",
+    "year": 2023,
+    "published": "2023-01-23T02:23:45Z",
+    "abstract": "Throughout history, the development of artificial intelligence, particularly artificial neural networks, has been open to and constantly inspired by the increasingly deepened understanding of the brain, such as the inspiration of neocognitron, which is the pioneering work of convolutional neural networks. Per the motives of the emerging field: NeuroAI, a great amount of neuroscience knowledge can help catalyze the next generation of AI by endowing a network with more powerful capabilities. As we know, the human brain has numerous morphologically and functionally different neurons, while artificial neural networks are almost exclusively built on a single neuron type. In the human brain, neuronal diversity is an enabling factor for all kinds of biological intelligent behaviors. Since an artificial network is a miniature of the human brain, introducing neuronal diversity should be valuable in terms of addressing those essential problems of artificial networks such as efficiency, interpretability, and memory. In this Primer, we first discuss the preliminaries of biological neuronal diversity and the characteristics of information transmission and processing in a biological neuron. Then, we review studies of designing new neurons for artificial networks. Next, we discuss what gains can neuronal diversity bring into artificial networks and exemplary applications in several important fields. Lastly, we discuss the challenges and future directions of neuronal diversity to explore the potential of NeuroAI.",
+    "categories": [
+      "cs.NE",
+      "cs.AI",
+      "cs.ET",
+      "cs.LG",
+      "q-bio.NC"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2301.09245v2",
+    "url": "http://arxiv.org/abs/2301.09245v2"
+  },
+  {
+    "arxiv_id": "2210.09263",
+    "title": "Vision-Language Pre-training: Basics, Recent Advances, and Future Trends",
+    "authors": "Zhe Gan, Linjie Li, Chunyuan Li et al.",
+    "year": 2022,
+    "published": "2022-10-17T17:11:36Z",
+    "abstract": "This paper surveys vision-language pre-training (VLP) methods for multimodal intelligence that have been developed in the last few years. We group these approaches into three categories: ($i$) VLP for image-text tasks, such as image captioning, image-text retrieval, visual question answering, and visual grounding; ($ii$) VLP for core computer vision tasks, such as (open-set) image classification, object detection, and segmentation; and ($iii$) VLP for video-text tasks, such as video captioning, video-text retrieval, and video question answering. For each category, we present a comprehensive review of state-of-the-art methods, and discuss the progress that has been made and challenges still being faced, using specific systems and models as case studies. In addition, for each category, we discuss advanced topics being actively explored in the research community, such as big foundation models, unified modeling, in-context few-shot learning, knowledge, robustness, and computer vision in the wild, to name a few.",
+    "categories": [
+      "cs.CV",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2210.09263v1",
+    "url": "http://arxiv.org/abs/2210.09263v1"
+  },
+  {
+    "arxiv_id": "2109.01854",
+    "title": "Predicting isocitrate dehydrogenase mutation status in glioma using structural brain networks and graph neural networks",
+    "authors": "Yiran Wei, Yonghao Li, Xi Chen et al.",
+    "year": 2021,
+    "published": "2021-09-04T12:19:33Z",
+    "abstract": "Glioma is a common malignant brain tumor with distinct survival among patients. The isocitrate dehydrogenase (IDH) gene mutation provides critical diagnostic and prognostic value for glioma. It is of crucial significance to non-invasively predict IDH mutation based on pre-treatment MRI. Machine learning/deep learning models show reasonable performance in predicting IDH mutation using MRI. However, most models neglect the systematic brain alterations caused by tumor invasion, where widespread infiltration along white matter tracts is a hallmark of glioma. Structural brain network provides an effective tool to characterize brain organisation, which could be captured by the graph neural networks (GNN) to more accurately predict IDH mutation. Here we propose a method to predict IDH mutation using GNN, based on the structural brain network of patients. Specifically, we firstly construct a network template of healthy subjects, consisting of atlases of edges (white matter tracts) and nodes (cortical/subcortical brain regions) to provide regions of interest (ROIs). Next, we employ autoencoders to extract the latent multi-modal MRI features from the ROIs of edges and nodes in patients, to train a GNN architecture for predicting IDH mutation. The results show that the proposed method outperforms the baseline models using the 3D-CNN and 3D-DenseNet. In addition, model interpretation suggests its ability to identify the tracts infiltrated by tumor, corresponding to clinical prior knowledge. In conclusion, integrating brain networks with GNN offers a new avenue to study brain lesions using computational neuroscience and computer vision approaches.",
+    "categories": [
+      "eess.IV",
+      "cs.CV",
+      "q-bio.NC"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2109.01854v2",
+    "url": "http://arxiv.org/abs/2109.01854v2"
+  },
+  {
+    "arxiv_id": "1803.02421",
+    "title": "Masked Conditional Neural Networks for Audio Classification",
+    "authors": "Fady Medhat, David Chesmore, John Robinson",
+    "year": 2018,
+    "published": "2018-03-06T20:54:00Z",
+    "abstract": "We present the ConditionaL Neural Network (CLNN) and the Masked ConditionaL Neural Network (MCLNN) designed for temporal signal recognition. The CLNN takes into consideration the temporal nature of the sound signal and the MCLNN extends upon the CLNN through a binary mask to preserve the spatial locality of the features and allows an automated exploration of the features combination analogous to hand-crafting the most relevant features for the recognition task. MCLNN has achieved competitive recognition accuracies on the GTZAN and the ISMIR2004 music datasets that surpass several state-of-the-art neural network based architectures and hand-crafted methods applied on both datasets.",
+    "categories": [
+      "stat.ML",
+      "cs.LG",
+      "cs.SD",
+      "eess.AS"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1803.02421v2",
+    "url": "http://arxiv.org/abs/1803.02421v2"
+  },
+  {
+    "arxiv_id": "2510.11852",
+    "title": "Evaluating Open-Source Vision-Language Models for Multimodal Sarcasm Detection",
+    "authors": "Saroj Basnet, Shafkat Farabi, Tharindu Ranasinghe et al.",
+    "year": 2025,
+    "published": "2025-10-13T19:05:21Z",
+    "abstract": "Recent advances in open-source vision-language models (VLMs) offer new opportunities for understanding complex and subjective multimodal phenomena such as sarcasm. In this work, we evaluate seven state-of-the-art VLMs - BLIP2, InstructBLIP, OpenFlamingo, LLaVA, PaliGemma, Gemma3, and Qwen-VL - on their ability to detect multimodal sarcasm using zero-, one-, and few-shot prompting. Furthermore, we evaluate the models' capabilities in generating explanations to sarcastic instances. We evaluate the capabilities of VLMs on three benchmark sarcasm datasets (Muse, MMSD2.0, and SarcNet). Our primary objectives are twofold: (1) to quantify each model's performance in detecting sarcastic image-caption pairs, and (2) to assess their ability to generate human-quality explanations that highlight the visual-textual incongruities driving sarcasm. Our results indicate that, while current models achieve moderate success in binary sarcasm detection, they are still not able to generate high-quality explanations without task-specific finetuning.",
+    "categories": [
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2510.11852v1",
+    "url": "http://arxiv.org/abs/2510.11852v1"
+  },
+  {
+    "arxiv_id": "2502.16238",
+    "title": "Brain-Model Evaluations Need the NeuroAI Turing Test",
+    "authors": "Jenelle Feather, Meenakshi Khosla, N. Apurva Ratan Murty et al.",
+    "year": 2025,
+    "published": "2025-02-22T14:16:28Z",
+    "abstract": "What makes an artificial system a good model of intelligence? The classical test proposed by Alan Turing focuses on behavior, requiring that an artificial agent's behavior be indistinguishable from that of a human. While behavioral similarity provides a strong starting point, two systems with very different internal representations can produce the same outputs. Thus, in modeling biological intelligence, the field of NeuroAI often aims to go beyond behavioral similarity and achieve representational convergence between a model's activations and the measured activity of a biological system. This position paper argues that the standard definition of the Turing Test is incomplete for NeuroAI, and proposes a stronger framework called the ``NeuroAI Turing Test'', a benchmark that extends beyond behavior alone and \\emph{additionally} requires models to produce internal neural representations that are empirically indistinguishable from those of a brain up to measured individual variability, i.e. the differences between a computational model and the brain is no more than the difference between one brain and another brain. While the brain is not necessarily the ceiling of intelligence, it remains the only universally agreed-upon example, making it a natural reference point for evaluating computational models. By proposing this framework, we aim to shift the discourse from loosely defined notions of brain inspiration to a systematic and testable standard centered on both behavior and internal representations, providing a clear benchmark for neuroscientific modeling and AI development.",
+    "categories": [
+      "q-bio.NC",
+      "cs.AI",
+      "cs.LG",
+      "cs.NE"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2502.16238v1",
+    "url": "http://arxiv.org/abs/2502.16238v1"
+  },
+  {
+    "arxiv_id": "2507.07104",
+    "title": "Vision-Language-Vision Auto-Encoder: Scalable Knowledge Distillation from Diffusion Models",
+    "authors": "Tiezheng Zhang, Yitong Li, Yu-cheng Chou et al.",
+    "year": 2025,
+    "published": "2025-07-09T17:59:04Z",
+    "abstract": "Building state-of-the-art Vision-Language Models (VLMs) with strong captioning capabilities typically necessitates training on billions of high-quality image-text pairs, requiring millions of GPU hours. This paper introduces the Vision-Language-Vision (VLV) auto-encoder framework, which strategically leverages key pretrained components: a vision encoder, the decoder of a Text-to-Image (T2I) diffusion model, and subsequently, a Large Language Model (LLM). Specifically, we establish an information bottleneck by regularizing the language representation space, achieved through freezing the pretrained T2I diffusion decoder. Our VLV pipeline effectively distills knowledge from the text-conditioned diffusion model using continuous embeddings, demonstrating comprehensive semantic understanding via high-quality reconstructions. Furthermore, by fine-tuning a pretrained LLM to decode the intermediate language representations into detailed descriptions, we construct a state-of-the-art (SoTA) captioner comparable to leading models like GPT-4o and Gemini 2.0 Flash. Our method demonstrates exceptional cost-efficiency and significantly reduces data requirements; by primarily utilizing single-modal images for training and maximizing the utility of existing pretrained models (image encoder, T2I diffusion model, and LLM), it circumvents the need for massive paired image-text datasets, keeping the total training expenditure under $1,000 USD.",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2507.07104v2",
+    "url": "http://arxiv.org/abs/2507.07104v2"
+  },
+  {
+    "arxiv_id": "2603.23521",
+    "title": "Chitrakshara: A Large Multilingual Multimodal Dataset for Indian languages",
+    "authors": "Shaharukh Khan, Ali Faraz, Abhinav Ravi et al.",
+    "year": 2026,
+    "published": "2026-03-06T15:01:25Z",
+    "abstract": "Multimodal research has predominantly focused on single-image reasoning, with limited exploration of multi-image scenarios. Recent models have sought to enhance multi-image understanding through large-scale pretraining on interleaved image-text datasets. However, most Vision-Language Models (VLMs) are trained primarily on English datasets, leading to inadequate representation of Indian languages. To address this gap, we introduce the Chitrakshara dataset series, covering 11 Indian languages sourced from Common Crawl. It comprises (1) Chitrakshara-IL, a large-scale interleaved pretraining dataset with 193M images, 30B text tokens, and 50M multilingual documents, and (2) Chitrakshara-Cap, which includes 44M image-text pairs with 733M tokens. This paper details the data collection pipeline, including curation, filtering, and processing methodologies. Additionally, we present a comprehensive quality and diversity analysis to assess the dataset's representativeness across Indic languages and its potential for developing more culturally inclusive VLMs.",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2603.23521v1",
+    "url": "http://arxiv.org/abs/2603.23521v1"
+  },
+  {
+    "arxiv_id": "1708.02757",
+    "title": "Isointense infant brain MRI segmentation with a dilated convolutional neural network",
+    "authors": "Pim Moeskops, Josien P. W. Pluim",
+    "year": 2017,
+    "published": "2017-08-09T08:49:12Z",
+    "abstract": "Quantitative analysis of brain MRI at the age of 6 months is difficult because of the limited contrast between white matter and gray matter. In this study, we use a dilated triplanar convolutional neural network in combination with a non-dilated 3D convolutional neural network for the segmentation of white matter, gray matter and cerebrospinal fluid in infant brain MR images, as provided by the MICCAI grand challenge on 6-month infant brain MRI segmentation.",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1708.02757v1",
+    "url": "http://arxiv.org/abs/1708.02757v1"
+  },
+  {
+    "arxiv_id": "1210.7956",
+    "title": "Implementation of a Vision System for a Landmine Detecting Robot Using Artificial Neural Network",
+    "authors": "Roger Achkar, Michel Owayjan",
+    "year": 2012,
+    "published": "2012-10-30T10:41:30Z",
+    "abstract": "Landmines, specifically anti-tank mines, cluster bombs, and unexploded ordnance form a serious problem in many countries. Several landmine sweeping techniques are used for minesweeping. This paper presents the design and the implementation of the vision system of an autonomous robot for landmines localization. The proposed work develops state-of-the-art techniques in digital image processing for pre-processing captured images of the contaminated area. After enhancement, Artificial Neural Network (ANN) is used in order to identify, recognize and classify the landmines' make and model. The Back-Propagation algorithm is used for training the network. The proposed work proved to be able to identify and classify different types of landmines under various conditions (rotated landmine, partially covered landmine) with a success rate of up to 90%.",
+    "categories": [
+      "cs.NE",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1210.7956v1",
+    "url": "http://arxiv.org/abs/1210.7956v1"
+  },
+  {
+    "arxiv_id": "2512.20929",
+    "title": "Decoding Predictive Inference in Visual Language Processing via Spatiotemporal Neural Coherence",
+    "authors": "Sean C. Borneman, Julia Krebs, Ronnie B. Wilbur et al.",
+    "year": 2025,
+    "published": "2025-12-24T04:19:20Z",
+    "abstract": "Human language processing relies on the brain's capacity for predictive inference. We present a machine learning framework for decoding neural (EEG) responses to dynamic visual language stimuli in Deaf signers. Using coherence between neural signals and optical flow-derived motion features, we construct spatiotemporal representations of predictive neural dynamics. Through entropy-based feature selection, we identify frequency-specific neural signatures that differentiate interpretable linguistic input from linguistically disrupted (time-reversed) stimuli. Our results reveal distributed left-hemispheric and frontal low-frequency coherence as key features in language comprehension, with experience-dependent neural signatures correlating with age. This work demonstrates a novel multimodal approach for probing experience-driven generative models of perception in the brain.",
+    "categories": [
+      "q-bio.NC",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2512.20929v1",
+    "url": "http://arxiv.org/abs/2512.20929v1"
+  },
+  {
+    "arxiv_id": "2501.13628",
+    "title": "Language modulates vision: Evidence from neural networks and human brain-lesion models",
+    "authors": "Haoyang Chen, Bo Liu, Shuyue Wang et al.",
+    "year": 2025,
+    "published": "2025-01-23T12:56:30Z",
+    "abstract": "Comparing information structures in between deep neural networks (DNNs) and the human brain has become a key method for exploring their similarities and differences. Recent research has shown better alignment of vision-language DNN models, such as CLIP, with the activity of the human ventral occipitotemporal cortex (VOTC) than earlier vision models, supporting the idea that language modulates human visual perception. However, interpreting the results from such comparisons is inherently limited due to the \"black box\" nature of DNNs. To address this, we combined model-brain fitness analyses with human brain lesion data to examine how disrupting the communication pathway between the visual and language systems causally affects the ability of vision-language DNNs to explain the activity of the VOTC. Across four diverse datasets, CLIP consistently captured unique variance in VOTC neural representations, relative to both label-supervised (ResNet) and unsupervised (MoCo) models. This advantage tended to be left-lateralized at the group level, aligning with the human language network. Analyses of 33 stroke patients revealed that reduced white matter integrity between the VOTC and the language region in the left angular gyrus was correlated with decreased CLIP-brain correspondence and increased MoCo-brain correspondence, indicating a dynamic influence of language processing on the activity of the VOTC. These findings support the integration of language modulation in neurocognitive models of human vision, reinforcing concepts from vision-language DNN models. The sensitivity of model-brain similarity to specific brain lesions demonstrates that leveraging manipulation of the human brain is a promising framework for evaluating and developing brain-like computer models.",
+    "categories": [
+      "q-bio.NC"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2501.13628v2",
+    "url": "http://arxiv.org/abs/2501.13628v2"
+  },
+  {
+    "arxiv_id": "1807.09844",
+    "title": "Modular Mechanistic Networks: On Bridging Mechanistic and Phenomenological Models with Deep Neural Networks in Natural Language Processing",
+    "authors": "Simon Dobnik, John D. Kelleher",
+    "year": 2018,
+    "published": "2018-07-21T11:37:15Z",
+    "abstract": "Natural language processing (NLP) can be done using either top-down (theory driven) and bottom-up (data driven) approaches, which we call mechanistic and phenomenological respectively. The approaches are frequently considered to stand in opposition to each other. Examining some recent approaches in deep learning we argue that deep neural networks incorporate both perspectives and, furthermore, that leveraging this aspect of deep learning may help in solving complex problems within language technology, such as modelling language and perception in the domain of spatial cognition.",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG",
+      "cs.NE",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1807.09844v2",
+    "url": "http://arxiv.org/abs/1807.09844v2"
+  },
+  {
+    "arxiv_id": "1912.09913",
+    "title": "Hierarchical Character Embeddings: Learning Phonological and Semantic Representations in Languages of Logographic Origin using Recursive Neural Networks",
+    "authors": "Minh Nguyen, Gia H. Ngo, Nancy F. Chen",
+    "year": 2019,
+    "published": "2019-12-20T16:24:23Z",
+    "abstract": "Logographs (Chinese characters) have recursive structures (i.e. hierarchies of sub-units in logographs) that contain phonological and semantic information, as developmental psychology literature suggests that native speakers leverage on the structures to learn how to read. Exploiting these structures could potentially lead to better embeddings that can benefit many downstream tasks. We propose building hierarchical logograph (character) embeddings from logograph recursive structures using treeLSTM, a recursive neural network. Using recursive neural network imposes a prior on the mapping from logographs to embeddings since the network must read in the sub-units in logographs according to the order specified by the recursive structures. Based on human behavior in language learning and reading, we hypothesize that modeling logographs' structures using recursive neural network should be beneficial. To verify this claim, we consider two tasks (1) predicting logographs' Cantonese pronunciation from logographic structures and (2) language modeling. Empirical results show that the proposed hierarchical embeddings outperform baseline approaches. Diagnostic analysis suggests that hierarchical embeddings constructed using treeLSTM is less sensitive to distractors, thus is more robust, especially on complex logographs.",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1912.09913v2",
+    "url": "http://arxiv.org/abs/1912.09913v2"
+  },
+  {
+    "arxiv_id": "2309.08612",
+    "title": "Explaining Vision and Language through Graphs of Events in Space and Time",
+    "authors": "Mihai Masala, Nicolae Cudlenco, Traian Rebedea et al.",
+    "year": 2023,
+    "published": "2023-08-29T07:25:06Z",
+    "abstract": "Artificial Intelligence makes great advances today and starts to bridge the gap between vision and language. However, we are still far from understanding, explaining and controlling explicitly the visual content from a linguistic perspective, because we still lack a common explainable representation between the two domains. In this work we come to address this limitation and propose the Graph of Events in Space and Time (GEST), by which we can represent, create and explain, both visual and linguistic stories. We provide a theoretical justification of our model and an experimental validation, which proves that GEST can bring a solid complementary value along powerful deep learning models. In particular, GEST can help improve at the content-level the generation of videos from text, by being easily incorporated into our novel video generation engine. Additionally, by using efficient graph matching techniques, the GEST graphs can also improve the comparisons between texts at the semantic level.",
+    "categories": [
+      "cs.AI",
+      "cs.CL",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2309.08612v1",
+    "url": "http://arxiv.org/abs/2309.08612v1"
+  }
+]

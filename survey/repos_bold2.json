@@ -1,0 +1,21 @@
+[
+  {
+    "name": "nmningmei/BOLD5000_autoencoder",
+    "url": "https://github.com/nmningmei/BOLD5000_autoencoder",
+    "clone_url": "https://github.com/nmningmei/BOLD5000_autoencoder.git",
+    "description": "autoencoder trained on BOLD5000 dataset",
+    "stars": 13,
+    "forks": 5,
+    "language": "Python",
+    "updated": "2023-01-24T23:37:57Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "autoencoder",
+      "fmri",
+      "pytorch",
+      "unsupervised-machine-learning"
+    ],
+    "open_issues": 0,
+    "default_branch": "master"
+  }
+]

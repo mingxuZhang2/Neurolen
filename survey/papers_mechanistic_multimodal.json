@@ -1,0 +1,72 @@
+[
+  {
+    "id": "7c57530318ae6c6e49c835f23e75affd9cf0827d",
+    "title": "Analyzing Vision Transformers for Image Classification in Class Embedding Space",
+    "authors": "M. Vilas, Timothy Schaumlöffel, Gemma Roig",
+    "year": 2023,
+    "venue": "Neural Information Processing Systems",
+    "citations": 38,
+    "abstract": "Despite the growing use of transformer models in computer vision, a mechanistic understanding of these networks is still needed. This work introduces a method to reverse-engineer Vision Transformers trained to solve image classification tasks. Inspired by previous research in NLP, we demonstrate how the inner representations at any level of the hierarchy can be projected onto the learned class embedding space to uncover how these networks build categorical representations for their predictions. We use our framework to show how image tokens develop class-specific representations that depend on attention mechanisms and contextual information, and give insights on how self-attention and MLP layers differentially contribute to this categorical composition. We additionally demonstrate that this method (1) can be used to determine the parts of an image that would be important for detecting the class of interest, and (2) exhibits significant advantages over traditional linear probing approaches. Taken together, our results position our proposed framework as a powerful tool for mechanistic interpretability and explainability research.",
+    "url": "https://www.semanticscholar.org/paper/7c57530318ae6c6e49c835f23e75affd9cf0827d",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2310.18969",
+    "arxiv": "2310.18969",
+    "publication_date": "2023-10-29"
+  },
+  {
+    "id": "7aac9e9c109f4684a169aea8883f54cecbb55a9a",
+    "title": "Linear Representations of Political Perspective Emerge in Large Language Models",
+    "authors": "Junsol Kim, James Evans, Aaron Schein",
+    "year": 2025,
+    "venue": "International Conference on Learning Representations",
+    "citations": 25,
+    "abstract": "Large language models (LLMs) have demonstrated the ability to generate text that realistically reflects a range of different subjective human perspectives. This paper studies how LLMs are seemingly able to reflect more liberal versus more conservative viewpoints among other political perspectives in American politics. We show that LLMs possess linear representations of political perspectives within activation space, wherein more similar perspectives are represented closer together. To do so, we probe the attention heads across the layers of three open transformer-based LLMs (Llama-2-7b-chat, Mistral-7b-instruct, Vicuna-7b). We first prompt models to generate text from the perspectives of different U.S. lawmakers. We then identify sets of attention heads whose activations linearly predict those lawmakers' DW-NOMINATE scores, a widely-used and validated measure of political ideology. We find that highly predictive heads are primarily located in the middle layers, often speculated to encode high-level concepts and tasks. Using probes only trained to predict lawmakers' ideology, we then show that the same probes can predict measures of news outlets' slant from the activations of models prompted to simulate text from those news outlets. These linear probes allow us to visualize, interpret, and monitor ideological stances implicitly adopted by an LLM as it generates open-ended responses. Finally, we demonstrate that by applying linear interventions to these attention heads, we can steer the model outputs toward a more liberal or conservative stance. Overall, our research suggests that LLMs possess a high-level linear representation of American political ideology and that by leveraging recent advances in mechanistic interpretability, we can identify, monitor, and steer the subjective perspective underlying generated text.",
+    "url": "https://www.semanticscholar.org/paper/7aac9e9c109f4684a169aea8883f54cecbb55a9a",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2503.02080",
+    "arxiv": "2503.02080",
+    "publication_date": "2025-03-03"
+  },
+  {
+    "id": "4010e60617271796b524a5516c050bfb3484946b",
+    "title": "Beyond the Doors of Perception: Vision Transformers Represent Relations Between Objects",
+    "authors": "Michael A. Lepori, Alexa R. Tartaglini, Wai Keen Vong et al.",
+    "year": 2024,
+    "venue": "Neural Information Processing Systems",
+    "citations": 17,
+    "abstract": "Though vision transformers (ViTs) have achieved state-of-the-art performance in a variety of settings, they exhibit surprising failures when performing tasks involving visual relations. This begs the question: how do ViTs attempt to perform tasks that require computing visual relations between objects? Prior efforts to interpret ViTs tend to focus on characterizing relevant low-level visual features. In contrast, we adopt methods from mechanistic interpretability to study the higher-level visual algorithms that ViTs use to perform abstract visual reasoning. We present a case study of a fundamental, yet surprisingly difficult, relational reasoning task: judging whether two visual entities are the same or different. We find that pretrained ViTs fine-tuned on this task often exhibit two qualitatively different stages of processing despite having no obvious inductive biases to do so: 1) a perceptual stage wherein local object features are extracted and stored in a disentangled representation, and 2) a relational stage wherein object representations are compared. In the second stage, we find evidence that ViTs can learn to represent somewhat abstract visual relations, a capability that has long been considered out of reach for artificial neural networks. Finally, we demonstrate that failures at either stage can prevent a model from learning a generalizable solution to our fairly simple tasks. By understanding ViTs in terms of discrete processing stages, one can more precisely diagnose and rectify shortcomings of existing and future models.",
+    "url": "https://www.semanticscholar.org/paper/4010e60617271796b524a5516c050bfb3484946b",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2406.15955",
+    "arxiv": "2406.15955",
+    "publication_date": "2024-06-22"
+  },
+  {
+    "id": "bd6c3f2fe1d0ae1bf9a842e923a052cddef586f9",
+    "title": "X-Former: Unifying Contrastive and Reconstruction Learning for MLLMs",
+    "authors": "Sirnam Swetha, Jinyu Yang, T. Neiman et al.",
+    "year": 2024,
+    "venue": "European Conference on Computer Vision",
+    "citations": 16,
+    "abstract": "Recent advancements in Multimodal Large Language Models (MLLMs) have revolutionized the field of vision-language understanding by integrating visual perception capabilities into Large Language Models (LLMs). The prevailing trend in this field involves the utilization of a vision encoder derived from vision-language contrastive learning (CL), showing expertise in capturing overall representations while facing difficulties in capturing detailed local patterns. In this work, we focus on enhancing the visual representations for MLLMs by combining high-frequency and detailed visual representations, obtained through masked image modeling (MIM), with semantically-enriched low-frequency representations captured by CL. To achieve this goal, we introduce X-Former which is a lightweight transformer module designed to exploit the complementary strengths of CL and MIM through an innovative interaction mechanism. Specifically, X-Former first bootstraps vision-language representation learning and multimodal-to-multimodal generative learning from two frozen vision encoders, i.e., CLIP-ViT (CL-based) and MAE-ViT (MIM-based). It further bootstraps vision-to-language generative learning from a frozen LLM to ensure visual features from X-Former can be interpreted by the LLM. To demonstrate the effectiveness of our approach, we assess its performance on tasks demanding detailed visual understanding. Extensive evaluations indicate that X-Former excels in visual reasoning tasks involving both structural and semantic categories in the GQA dataset. Assessment on fine-grained visual perception benchmark further confirms its superior capabilities in visual understanding.",
+    "url": "https://www.semanticscholar.org/paper/bd6c3f2fe1d0ae1bf9a842e923a052cddef586f9",
+    "pdf": "",
+    "doi": "10.48550/arXiv.2407.13851",
+    "arxiv": "2407.13851",
+    "publication_date": "2024-07-18"
+  },
+  {
+    "id": "972c0ebaf5cd2b07f9b7767bbda6ec0e344e4daa",
+    "title": "TargetVAU: Multimodal Anomaly-Aware Reasoning for Target Behavior Understanding in Videos",
+    "authors": "Lingru Zhou, Peng Wu, Manqing Zhang et al.",
+    "year": 2026,
+    "venue": "AAAI Conference on Artificial Intelligence",
+    "citations": 0,
+    "abstract": "Understanding anomalous human behaviors at a fine-grained level remains a major challenge in complex scenarios. Existing video anomaly understanding (VAU) methods often rely on coarse frame-level cues or overlook structured modeling of individual actions, limiting their capacity for reasoning about human interactions and accountability. To address these challenges, we propose TargetVAU, a multimodal anomaly-aware reasoning framework designed for individual-level anomaly recognition and explanation. TargetVAU first extracts both global-level and human-centric visual features using a frozen Vision Transformer (ViT) encoder. An Anomaly-focused Temporal Sampler is then employed to select behaviorally informative frames via a density-aware strategy guided by predicted anomaly scores. A Spatio-Temporal Interaction Graph is constructed to explicitly model interactions among individuals across time and space. These structured representations are fused with prompt embeddings via a frozen Q-Former to form a unified semantic representation. Finally, a large language model fine-tuned with low-rank adaptation (LoRA) performs instruction-guided reasoning to identify anomalous individuals and generate natural language explanations. Extensive experiments on UCCD and HIVAU-70K demonstrate that TargetVAU significantly outperforms existing methods in both accuracy and interpretability, advancing the state of individual-level anomaly understanding in surveillance videos.",
+    "url": "https://www.semanticscholar.org/paper/972c0ebaf5cd2b07f9b7767bbda6ec0e344e4daa",
+    "pdf": "",
+    "doi": "10.1609/aaai.v40i16.38378",
+    "arxiv": null,
+    "publication_date": "2026-03-14"
+  }
+]

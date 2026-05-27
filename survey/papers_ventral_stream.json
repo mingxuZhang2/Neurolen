@@ -1,0 +1,58 @@
+[
+  {
+    "id": "73616843d122ba7bf2a887945d553280d20efc04",
+    "title": "Re-emergence of orientation coding in primate IT cortex and deep networks reveals functional hubs for visual processing",
+    "authors": "Behnam Karami, Tarana Nigam, Sandrin S. Plewe et al.",
+    "year": 2025,
+    "venue": "bioRxiv",
+    "citations": 1,
+    "abstract": null,
+    "url": "https://www.semanticscholar.org/paper/73616843d122ba7bf2a887945d553280d20efc04",
+    "pdf": "",
+    "doi": "10.1101/2025.10.23.684240",
+    "arxiv": null,
+    "publication_date": "2025-10-24"
+  },
+  {
+    "id": "2ef1af73ddb189bc68ade963f218dd2e49c21fce",
+    "title": "Manifold transform by recurrent cortical circuit enhances robust encoding of familiar stimuli",
+    "authors": "Weifan Wang, Xueyan Niu, Liyuan Liang et al.",
+    "year": 2024,
+    "venue": "bioRxiv",
+    "citations": 1,
+    "abstract": "A ubiquitous phenomenon observed along the ventral stream of the primate hierarchical visual system is the suppression of neural responses to familiar stimuli at the population level. The observation of the suppression of the neural response in the early visual cortex (V1 and V2) to familiar stimuli of size that are multiple times larger in size than the receptive fields of individual neurons reflects the plausible development of recurrent circuits for encoding these global stimuli. In this work, we investigated the neural mechanisms of familiarity suppression and showed that an excitatory recurrent neural circuit, consisting of neurons with small and local receptive fields, can develop to encode specific global familiar stimuli robustly as a result of familiarity training. This Hebbian learning based model attributes the observed familiarity suppression effect to the sparsification of the population neural code for the familiar stimuli due to the formation of image-specific local excitatory circuits and competitive normalization among neurons, leading to the paradoxical neural response suppression to the familiar stimuli at the population level. We explored the computational implications of the proposed circuit by relating it to the sparse manifold transform. The recurrent circuit, by linking spatially co-occurring visual features together, compresses the dimensions of irrelevant variations of a familiar image in the neural response manifold relative to the dimensions for discriminating different familiar stimuli. The computation can be considered as a globally non-linear but locally linear manifold transform that orthogonalizes the slow modes of network dynamics relative to the subspace of irrelevant stimulus variations, resulting in increased robustness of the global stimulus representation against noises and other irrelevant perturbations. These results provide testable predictions for neurophysiological experiments. Author summary In this research, we explored how the brain can become more efficient at processing familiar visual information. When we repeatedly see something, our brain’s response to it changes. In response to familiar stimuli, neurons across the different visual areas of the mammalian visual system become more selective and their overall activities decrease. We developed a computational model to investigate why this happens and what functional advantages these mechanisms might provide. We discovered that familiarity leads to the development of a more efficient and robust neural representation of what we see. It allows us to rapidly and robustly recognize our friend’s face despite changes in lighting conditions, view angle, or facial expression. Our model showed that through repeated exposure, the brain’s neural circuits, even in the early stages of visual processing, rapidly adapt and organize themselves to focus on important and consistent features in our visual environment while becoming less sensitive to irrelevant variations, and distractions.",
+    "url": "https://www.semanticscholar.org/paper/2ef1af73ddb189bc68ade963f218dd2e49c21fce",
+    "pdf": "http://arxiv.org/pdf/2408.10873",
+    "doi": "10.1101/2025.03.02.641067",
+    "arxiv": "2408.10873",
+    "publication_date": "2024-08-20"
+  },
+  {
+    "id": "aa3873d003df5af3f80323034bc0d5f477885464",
+    "title": "Brain feature maps reveal progressive animal-feature representations in the ventral stream",
+    "authors": "Zhanqi Zhang, Till S. Hartmann, R. T. Born et al.",
+    "year": 2025,
+    "venue": "bioRxiv",
+    "citations": 0,
+    "abstract": "What are the fundamental units of representation in the primate visual brain? While objects have become an intuitive framework for studying neurons in many parts of cortex, it is possible that neurons follow a more expressive organizational principle, such as encoding generic features present across textures, places, and objects. In this study, we used multi-electrode arrays to record from neurons in early (V1/V2), middle (V4), and late (posterior inferotemporal cortex (PIT)) areas across the visual hierarchy, estimating the local operation of each neuron over the entire visual scene. These estimates, called “heatmaps,” approximate the weight sharing operation of convolutional neural networks. We found that while populations of neurons across V1, V4, and PIT responded over the full scene, they focused on salient sub-regions within object outlines. The best captured object feature class belonged to animals, not general objects, as a trend that increased over the visual hierarchy. These results show that the monkey ventral stream is partially organized to encode local animal features over objects, even as early as primary visual cortex.",
+    "url": "https://www.semanticscholar.org/paper/aa3873d003df5af3f80323034bc0d5f477885464",
+    "pdf": "",
+    "doi": "10.1126/sciadv.adq7342",
+    "arxiv": null,
+    "publication_date": "2025-01-23"
+  },
+  {
+    "id": "d2d7e5ba630229bdf726c49c8b208f8e48e89250",
+    "title": "Feature Visualization Recovers Known Cortical Selectivity from TRIBE v2",
+    "authors": "Stuart Bladon, Brinnae Bent",
+    "year": 2026,
+    "venue": "",
+    "citations": 0,
+    "abstract": "Brain encoder models predict cortical fMRI responses from the internal activations of pretrained vision and language networks, and are typically evaluated by held-out prediction accuracy. This is a useful signal for training but a poor one for interpretation: it tells us an encoder fits the data without telling us whether it has internalized the functional organization of the brain. We propose feature visualization -- gradient ascent on the encoder's predicted activation for a target region of interest (ROI) -- as a complementary interpretability technique, and apply it to TRIBE v2 composed with V-JEPA 2 (ViT-G, 40 layers), holding both frozen and synthesizing still images for seven regions spanning the ventral and dorsal visual hierarchies. Under identical hyperparameters, the probe recovers a visible progression of increasing spatial scale and feature complexity across V1 to V4, matching the ventral-stream hierarchy. It also produces three distinctive downstream regimes: radial\"frozen-motion\"streaks for the middle temporal area (MT) despite static-only optimization, face-like features for the fusiform face area (FFA), and consistent rectilinear line patterns for the parahippocampal place area (PPA). Optimized FFA stimuli drive the predicted region ~4x as much as a natural face photograph, consistent with feature visualization producing adversarial super-stimuli rather than canonical exemplars. The probe is simple, differentiable, and applicable to any brain encoder with a differentiable backbone, allowing for qualitative evaluation of brain encoders.",
+    "url": "https://www.semanticscholar.org/paper/d2d7e5ba630229bdf726c49c8b208f8e48e89250",
+    "pdf": "",
+    "doi": null,
+    "arxiv": "2605.13904",
+    "publication_date": "2026-05-13"
+  }
+]

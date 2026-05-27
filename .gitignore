@@ -1,0 +1,35 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+*.so
+.env
+
+# Data / model weights / results (large files)
+activations/
+brain_data/
+rdms/
+results/
+results_v2/
+figures/
+logs/
+stimuli/
+eval_images/
+models/
+transfer/
+coco_val/
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.bin
+*.safetensors
+*.whl
+*.zip
+experiment.log
+
+# Claude internals
+.claude/scheduled_tasks.lock
