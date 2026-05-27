@@ -98,17 +98,59 @@ def _ridge_cv_voxelwise(
     return _pearson_r_per_voxel(fold_preds, Y)
 
 
+def _ridge_final_voxelwise(
+    X_raw: np.ndarray, Y: np.ndarray,
+    n_folds: int = 5,
+    pca_dim: int = 256,
+    alpha: float = 10000.0,
+    seed: int = 42,
+) -> np.ndarray:
+    """Production-quality Ridge: 5-fold CV with fold-local PCA + standardization.
+
+    X_raw: (n_stim, raw_dim) — raw features (4096-d or pre-PCA'd; PCA applied if raw_dim > pca_dim)
+    Y: (n_stim, n_voxels)
+    Returns: per-voxel Pearson r from out-of-fold predictions.
+    """
+    n_stim, raw_dim = X_raw.shape
+    Y_centered = Y - Y.mean(axis=0, keepdims=True)
+
+    kf = KFold(n_splits=n_folds, shuffle=True, random_state=seed)
+    fold_preds = np.zeros_like(Y_centered)
+
+    for train_idx, test_idx in kf.split(X_raw):
+        X_tr_raw = X_raw[train_idx]
+        X_te_raw = X_raw[test_idx]
+        Y_tr = Y_centered[train_idx]
+
+        # Fold-local PCA (fit on train only)
+        if raw_dim > pca_dim and n_stim > pca_dim:
+            pca = PCA(n_components=pca_dim, random_state=seed, svd_solver="randomized")
+            X_tr = pca.fit_transform(X_tr_raw)
+            X_te = pca.transform(X_te_raw)
+        else:
+            X_tr = X_tr_raw
+            X_te = X_te_raw
+
+        # Fold-local standardization (fit on train only)
+        mu = X_tr.mean(axis=0, keepdims=True)
+        sd = X_tr.std(axis=0, keepdims=True) + 1e-8
+        X_tr = (X_tr - mu) / sd
+        X_te = (X_te - mu) / sd
+
+        ridge = Ridge(alpha=alpha, fit_intercept=False)
+        ridge.fit(X_tr, Y_tr)
+        fold_preds[test_idx] = ridge.predict(X_te)
+
+    return _pearson_r_per_voxel(fold_preds, Y_centered)
+
+
 def _ridge_fast_voxelwise(
     X: np.ndarray, Y: np.ndarray,
     alpha: float = 10000.0,
     test_frac: float = 0.2,
     seed: int = 42,
 ) -> np.ndarray:
-    """Fast single-split Ridge for token-level encoding (576 calls per layer/ROI).
-
-    ~25× faster than _ridge_cv_voxelwise by eliminating inner alpha CV +
-    using a single 80/20 split instead of 5-fold.
-    """
+    """Fast single-split Ridge for smoke tests only. NOT for final results."""
     n = X.shape[0]
     rng = np.random.default_rng(seed)
     perm = rng.permutation(n)
@@ -144,17 +186,29 @@ class SpatialEncodingResult:
 
 
 def run_token_spatial_encoding(
-    token_activations_per_layer: dict[int, np.ndarray],   # L -> (n_img, n_tok, pca_dim)
+    token_activations_per_layer: dict[int, np.ndarray],   # L -> (n_img, n_tok, dim)
     activation_nsd_ids: np.ndarray,
     brain_per_roi: dict[str, dict],                       # roi -> {voxels, nsd_ids, ncsnr}
     n_folds: int = 5,
+    pca_dim: int = 256,
+    final_mode: bool = False,
     output_dir: Optional[str | Path] = None,
 ) -> SpatialEncodingResult:
-    """For each (token i, layer L, ROI R), fit X_i_L -> Y_R and record best voxel."""
+    """For each (token i, layer L, ROI R), fit X_i_L -> Y_R and record best voxel.
+
+    Args:
+        final_mode: if True, use _ridge_final_voxelwise with fold-local PCA.
+                    if False, use _ridge_fast_voxelwise (smoke test only).
+    """
     layers = sorted(token_activations_per_layer.keys())
     roi_names = list(brain_per_roi.keys())
     sample0 = token_activations_per_layer[layers[0]]
-    _, n_tokens, _ = sample0.shape
+    _, n_tokens, feat_dim = sample0.shape
+
+    if final_mode:
+        logger.info(f"FINAL MODE: 5-fold CV + fold-local PCA({feat_dim}->{pca_dim})")
+    else:
+        logger.info(f"FAST MODE: single-split (smoke test only)")
 
     best_r = np.zeros((n_tokens, len(layers), len(roi_names)), dtype=np.float32)
     best_voxel = np.zeros((n_tokens, len(layers), len(roi_names)), dtype=np.int32)
@@ -163,13 +217,12 @@ def run_token_spatial_encoding(
     nsd_to_idx = {int(n): i for i, n in enumerate(activation_nsd_ids)}
 
     for j, roi in enumerate(roi_names):
-        Y_full = brain_per_roi[roi]["voxels"]    # (n_brain_stim, n_vox)
+        Y_full = brain_per_roi[roi]["voxels"]
         brain_ids = brain_per_roi[roi]["nsd_ids"]
         if Y_full.shape[1] == 0:
             logger.warning(f"ROI {roi}: 0 voxels; skipping")
             continue
 
-        # Align activations to brain ordering
         keep_brain, keep_act = [], []
         for brow, nid in enumerate(brain_ids):
             a = nsd_to_idx.get(int(nid))
@@ -182,17 +235,20 @@ def run_token_spatial_encoding(
             logger.warning(f"ROI {roi}: only {len(keep_brain)} aligned stim; skip")
             continue
         Y = Y_full[keep_brain].astype(np.float32)
-        n_vox = Y.shape[1]
 
         logger.info(f"ROI {roi}: Y shape={Y.shape}")
 
         for i_l, L in enumerate(layers):
-            X_all = token_activations_per_layer[L]   # (n_img_act, n_tok, pca_dim)
-            X_sel = X_all[keep_act].astype(np.float32)   # (n_aligned, n_tok, pca_dim)
+            X_all = token_activations_per_layer[L]
+            X_sel = X_all[keep_act].astype(np.float32)
 
             for tok in range(n_tokens):
                 X_tok = X_sel[:, tok, :]
-                r_v = _ridge_fast_voxelwise(X_tok, Y)
+                if final_mode:
+                    r_v = _ridge_final_voxelwise(
+                        X_tok, Y, n_folds=n_folds, pca_dim=pca_dim)
+                else:
+                    r_v = _ridge_fast_voxelwise(X_tok, Y)
                 best_v = int(np.argmax(r_v))
                 best_r[tok, i_l, j] = float(r_v[best_v])
                 best_voxel[tok, i_l, j] = best_v
