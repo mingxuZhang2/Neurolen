@@ -20,11 +20,11 @@ The LLaMA decoder does not merely pass CLIP features through — it actively res
 
 - Decoder gain: **+72% (V3) to +98% (V2)** over CLIP patches
 - MLP projector *slightly hurts* alignment (optimizes for LLM compatibility, not brain-likeness)
-- Confirmed with 5-fold CV: V1 CLIP=0.319 → L14=0.453 (same trend, ~15% lower than single-split)
+- Confirmed with 5-fold CV (mean_r): V1 0.049→0.082, V2 0.047→0.088, V3 0.085→0.136, V4 0.075→0.132
 
 **Noise-ceiling normalized**: LLaMA L14 explains **17–21% of noise ceiling** for V1–V4; CLIP patches only 9–11%.
 
-### Finding 2: Image tokens are a visual memory bank — they never become linguistic
+### Finding 2: Image tokens are a prompt-invariant visual memory bank
 
 Three-stream comparison (image tokens vs prompt tokens vs generated tokens) against 11 brain ROIs:
 
@@ -59,9 +59,9 @@ The layer × stream trajectory tells a clear story:
 - Prompt tokens: stable, slightly below image tokens — **intermediate readout**
 - Generated tokens: **monotonically decline** from L0 to L31 — visual info consumed, converted to language output
 
-**Interpretation**: MLLM does not transform image tokens into language tokens. Image tokens remain a visual substrate throughout all 32 layers. The decoder amplifies their visual-cortical alignment at mid-layers, then generated tokens read from this substrate via cross-attention and produce language output — losing visual information in the process.
+**Interpretation**: Under current probes, there is no evidence that MLLM transforms image tokens into language tokens. Image tokens remain a visual substrate throughout all 32 layers. The decoder amplifies their visual-cortical alignment at mid-layers, then generated tokens read from this substrate via causal self-attention over the image prefix and produce language output — losing visual information in the process.
 
-This parallels human brain organization: V1 does not become Broca's area. Visual information flows from visual cortex to language areas through inter-area connections, not intra-area transformation.
+This division of labor is reminiscent of cortical specialization: visual information flows from visual cortex to language areas through inter-area connections, not intra-area transformation.
 
 ## Statistical Rigor
 
@@ -100,7 +100,7 @@ Logit-lens top-10 words → word embedding average → Ridge to language ROIs. R
 3. **602/1000 images** (22/40 NSD sessions)
 4. **Single MLLM** (LLaVA; Qwen2-VL and InternVL2 planned)
 5. **Language ROIs poorly suited** for NSD viewing task (low noise ceiling)
-6. **Global PCA before CV** (mild train/test leakage; acknowledged as limitation)
+6. **PCA leakage**: Current main results use 5-fold CV on pre-PCA'd features. Gold-standard raw 4096-d with fold-local PCA rerun in progress.
 7. **No pRF retinotopy validation** yet (planned)
 
 ## Project Structure

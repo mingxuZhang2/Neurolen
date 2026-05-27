@@ -7,16 +7,19 @@ Mark `[x]` when addressed. Last updated: 2026-05-27 21:45 CST.
 
 ## Experimental Results Summary
 
-### Completed experiments (7 of 7 core experiments done)
+### Experiment status
+
+Core pilot experiments complete; publication-critical validation remains in progress.
+
 1. **Token-level spatial encoding** (576 tokens × 32 layers × V1/V2/V3/V4) ✅
 2. **Token-level semantic encoding** via logit lens (576 × 32 × Broca/IFG/auditory/temporal) ✅
 3. **CLIP baseline** (CLIP-ViT patches + MLP projector vs decoder) ✅
 4. **Noise ceiling** computation from NSD ncsnr ✅
-5. **Parametric significance** (t-test across 576 tokens) ✅
+5. **Parametric significance** (t-test across 576 tokens, demoted to sanity check) ✅
 6. **Sequence-position dissociation** (image/prompt/generated × 10 layers × 11 ROIs) ✅
 7. **Multi-prompt invariance test** (5 prompts × 3 streams × cosine similarity) ✅
 8. **5-fold CV validation** (9 layers × 4 ROIs, confirms single-split trends) ✅
-9. Gold-standard raw 4096-d + fold-local PCA encoding 🔄 running (~3h)
+9. Gold-standard raw 4096-d + fold-local PCA encoding 🔄 rerunning (CLIP/projector confirmed; decoder layers need memory fix)
 
 ### Three core findings
 
@@ -118,7 +121,7 @@ One exception: AG=0.038 for generated tokens (highest of all streams) — weak s
 | "Token = local patch" framing | ⬜ Acknowledged | Will use "spatially-indexed, globally-contextualized visual tokens." |
 | "Reversed hierarchy" claim | ✅ Retracted | mean_r shows all ROIs peak L13-14. No reversal. |
 | Language ROI interpretation | ✅ Updated | Expanded to 11 ROIs (FFA/PPA/EBA/STS/AG/Broca/IFG). Broca low NC acknowledged. |
-| "cross-attention" wording | ⬜ Will fix | Should be "causal self-attention over image prefix" (decoder-only arch). |
+| "cross-attention" wording | ✅ Fixed | Changed to "causal self-attention over image prefix" in README. |
 
 ### P1: Logit Lens
 
@@ -149,11 +152,11 @@ One exception: AG=0.038 for generated tokens (highest of all streams) — weak s
 
 | Concern | Status | Evidence |
 |---|---|---|
-| README PCA contradiction | ⬜ Will fix | Need to unify "fold-local PCA" vs "global PCA leakage" language. |
-| 0.048 vs 0.319 metric confusion | ✅ Fixed | 5-fold table now primary. All best_r values labeled explicitly. |
-| "cross-attention" → "causal self-attention" | ⬜ Will fix in README |
-| "do NOT become linguistic" too strong | ⬜ Will soften | → "no evidence for linguisticization under current probes" |
-| "V1 never becomes Broca" too strong | ⬜ Will soften | → "division-of-labor reminiscent of cortical specialization" |
+| README PCA contradiction | ✅ Fixed | Limitation now reads: "Current results use 5-fold CV on pre-PCA'd features. Gold-standard raw 4096-d fold-local PCA rerun in progress." |
+| 0.048 vs 0.319 metric confusion | ✅ Fixed | Removed best_r from 5-fold line; now shows mean_r only (0.049→0.082 etc). |
+| "cross-attention" → "causal self-attention" | ✅ Fixed | README updated to "causal self-attention over image prefix" |
+| "do NOT become linguistic" too strong | ✅ Fixed | → "no evidence under current probes" |
+| "V1 never becomes Broca" too strong | ✅ Fixed | → "division-of-labor reminiscent of cortical specialization" |
 | Prompt tokens ≈ image tokens in V1/V3 | ✅ Noted | Prompt tokens slightly higher in V1/V3 (attend to image prefix). Image tokens higher in FFA/PPA/EBA. |
 | AG=0.038 too weak for "language conversion" | ✅ Acknowledged | Described as "weak preliminary signal" not strong conclusion. |
 | CLIP baseline needs layer sweep | ⬜ Planned | CLIP multi-layer + DINOv2 + low-level baselines. |
