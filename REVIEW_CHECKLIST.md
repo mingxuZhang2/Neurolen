@@ -62,9 +62,21 @@ Original hypothesis: "vision tokens transition from visual to linguistic code ac
   - Language ROIs have low NC (Broca=0.30, temporal_pole=0.11) → confirms low SNR for viewing task
   - Saved: `results_v2/statistical_tests/noise_ceiling.npz`
 
+- [x] **Fix single-split → 5-fold CV** (GPT Pro R2 caught this bug)
+  - `_ridge_fast_voxelwise` was 80/20 single split, not 5-fold
+  - New `_ridge_final_voxelwise`: 5-fold CV + fold-local PCA + fold-local standardization
+  - Job 315800 submitted for 9 representative layers + CLIP baseline
+  - Commit: `5edb704`
+
 - [ ] **Nested CV for voxel selection**
   - If reporting any per-voxel results: select voxels on inner training fold, evaluate on held-out test fold
   - Alternatively: pre-select top-N reliable voxels by ncsnr (independent of model)
+
+- [ ] **PCA train/test leakage** (GPT Pro R2)
+  - Current: global PCA on all 1000 images before train/test split
+  - Fix in `_ridge_final_voxelwise` does fold-local PCA on 256-d (already PCA'd)
+  - Full fix needs raw 4096-d re-extraction → fold-local PCA from raw
+  - Workaround: acknowledge as limitation, report fold-local vs global sanity check
 
 - [x] **Parametric significance**: t-test across 576 tokens, all p < 1e-190, t > 44
 - [ ] **Permutation null distribution** — Job 315704 RUNNING (~2h)
