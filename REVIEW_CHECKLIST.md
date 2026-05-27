@@ -13,6 +13,7 @@ Mark `[x]` when addressed with commit hash.
 3. **CLIP baseline** (CLIP-ViT patches + MLP projector) ✅
 4. **Noise ceiling** computation ✅
 5. **Parametric significance** test ✅
+6. **Sequence-position dissociation** (image/prompt/generated × 10 layers × 11 ROIs) ✅ **NEW**
 6. **Permutation null** test 🔄 running
 
 ### Key quantitative results
@@ -41,9 +42,22 @@ All values ≈ 0.001–0.008 — **effectively zero**. Vision tokens do NOT beco
 
 **Significance**: all spatial (layer, ROI) t > 44, p < 10⁻¹⁹⁰
 
-### Revised narrative
+**Sequence-position dissociation (layer-averaged mean_r, 11 ROIs)**:
+| Stream | V1 | V3 | FFA | PPA | EBA | AG | Broca |
+|---|---|---|---|---|---|---|---|
+| image tokens | 0.109 | 0.163 | **0.240** | **0.238** | **0.265** | 0.027 | 0.040 |
+| prompt tokens | 0.111 | 0.167 | 0.231 | 0.221 | 0.260 | 0.017 | 0.023 |
+| generated tokens | 0.081 | 0.124 | 0.206 | 0.199 | 0.239 | **0.038** | 0.024 |
+
+### Revised narrative (updated after seq diss experiment)
 Original hypothesis: "vision tokens transition from visual to linguistic code across layers"
-**Result**: vision tokens remain visual throughout all 32 layers. Decoder mid-layers reshape them into MORE brain-aligned visual representations (+72-98% vs CLIP), but they never acquire linguistic properties measurable by logit-lens → language ROI encoding. Vision-to-language transformation likely occurs at text token positions via cross-attention.
+
+**Result — three findings**:
+1. **Decoder amplifies visual alignment**: CLIP→projector→decoder mid-layer shows +72-98% gain in visual ROI encoding
+2. **Image tokens are a visual memory bank**: they dominate FFA/PPA/EBA encoding across all layers, never acquiring linguistic properties
+3. **Vision-to-language conversion is positional, not transformational**: generated tokens lose visual info (−24-43%) while gaining marginal semantic signal (AG=0.038). Language is produced at output positions by reading from the visual substrate, not by converting image tokens into language tokens.
+
+**Proposed paper thesis**: "A language decoder amplifies human visual-cortical alignment without linguisticizing image tokens — vision-to-language conversion occurs through sequence-position routing, not token-internal transformation."
 
 ---
 
