@@ -5,6 +5,48 @@ Mark `[x]` when addressed with commit hash.
 
 ---
 
+## Experimental Results Summary (2026-05-27)
+
+### Completed experiments
+1. **Token-level spatial encoding** (576 tokens × 32 layers × V1/V2/V3/V4) ✅
+2. **Token-level semantic encoding** via logit lens (576 × 32 × Broca/IFG/auditory/temporal) ✅
+3. **CLIP baseline** (CLIP-ViT patches + MLP projector) ✅
+4. **Noise ceiling** computation ✅
+5. **Parametric significance** test ✅
+6. **Permutation null** test 🔄 running
+
+### Key quantitative results
+
+**Spatial encoding (mean_r, averaged over 576 tokens)**:
+| Stage | V1 | V2 | V3 | V4 |
+|---|---|---|---|---|
+| CLIP-ViT patches | 0.048 | 0.047 | 0.079 | 0.072 |
+| MLP projector | 0.042 | 0.040 | 0.063 | 0.060 |
+| LLaMA L0 | 0.043 | 0.040 | 0.064 | 0.060 |
+| **LLaMA L14 (peak)** | **0.090** | **0.094** | **0.135** | **0.132** |
+| LLaMA L31 | 0.075 | 0.086 | 0.111 | 0.108 |
+
+**Decoder gain over CLIP**: +72% (V3) to +98% (V2)
+
+**Semantic encoding (mean_r, logit-lens → language ROIs)**:
+All values ≈ 0.001–0.008 — **effectively zero**. Vision tokens do NOT become linguistic.
+
+**Noise ceiling (NC_r from NSD ncsnr)**:
+| ROI | NC_r | LLaMA peak / NC |
+|---|---|---|
+| V1 | 0.544 | 16.6% |
+| V3 | 0.688 | 19.7% |
+| Broca | 0.303 | — (semantic ≈ 0) |
+| temporal_pole | 0.111 | — |
+
+**Significance**: all spatial (layer, ROI) t > 44, p < 10⁻¹⁹⁰
+
+### Revised narrative
+Original hypothesis: "vision tokens transition from visual to linguistic code across layers"
+**Result**: vision tokens remain visual throughout all 32 layers. Decoder mid-layers reshape them into MORE brain-aligned visual representations (+72-98% vs CLIP), but they never acquire linguistic properties measurable by logit-lens → language ROI encoding. Vision-to-language transformation likely occurs at text token positions via cross-attention.
+
+---
+
 ## P0 — Must fix before any submission
 
 ### Metrics & Statistical Rigor

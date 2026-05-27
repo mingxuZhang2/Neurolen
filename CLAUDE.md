@@ -1,96 +1,87 @@
 # NeuroLens
 
-Maps MLLM processing stages to brain functional hierarchy using representational similarity analysis, CKA, encoding models, and causal validation via activation patching.
+Token-level MLLM–brain alignment: how LLaVA's 576 vision tokens map to human visual cortex across 32 decoder layers, using NSD 7T fMRI.
+
+## Current Status (2026-05-27)
+
+**Core finding**: LLaMA decoder reshapes CLIP vision tokens to be ~2× more brain-aligned (mean_r +72-98% over CLIP patches), peaking at mid-layers (L13-14). Vision tokens remain visual throughout — they never become linguistic.
+
+**Completed**: token extraction, spatial encoding (V1-V4), semantic encoding (Broca/IFG), CLIP baseline, noise ceiling, parametric tests.
+**Running**: permutation null test.
+**Pending**: 8 subjects, multi-MLLM, expanded ROIs, causal ablation.
+
+See [README.md](README.md) for full results and [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) for review status.
 
 ## Project Structure
 
 ```
-mllm/
-  implementation/
-    DESIGN.md                  # Technical design document (read this first)
-    environment.yml            # Conda environment: neurolens
-    run_experiment.py          # Main entry point (--step extract|brain|rdms|analyze|patch|visualize|all)
-    configs/
-      models.yaml              # Model HF IDs, layer counts, stage boundaries
-      rois.yaml                # Brain ROI definitions (Glasser + Destrieux + NSD)
-      experiments.yaml         # Experiment parameters (bootstrap, CV folds, etc.)
-    src/
-      data/
-        nsd_loader.py          # NSD beta loading, ROI extraction, brain RDM computation
-        stimulus_align.py      # NSD-COCO alignment, stimulus pair creation
-      models/
-        extract_activations.py # Hook-based activation extraction (LLaVA, Qwen2-VL, InternVL2)
-        model_rdm.py           # Model RDM computation from activation arrays
-      analysis/
-        rsa_analysis.py        # RSA with bootstrap CI and permutation tests
-        cka_analysis.py        # Linear CKA (+ kernel CKA supplementary)
-        encoding_models.py     # Ridge regression encoding models with nested CV
-        statistical_tests.py   # Bootstrap CI, permutation tests, FDR, noise ceiling
-      patching/
-        activation_patching.py # Stage-specific mean/zero/noise ablation
-        dissociation.py        # Triple dissociation experiment (3 stages x 3 tasks)
-        eval_patching.py       # VQA accuracy, binding accuracy, language quality metrics
-      visualization/
-        heatmaps.py            # Layer x ROI heatmaps, dissociation matrix, metric comparison
-        brain_maps.py          # Glass brain plots, surface maps, schematic brain diagrams
-    scripts/
-      run_extraction.sh        # SLURM: GPU job for activation extraction
-      run_analysis.sh          # SLURM: CPU job for RSA/CKA/encoding
-      run_patching.sh          # SLURM: GPU job for triple dissociation
-      run_all.sh               # Master script: submits all jobs with dependencies
-  survey/                      # Literature survey outputs
+implementation/
+  src/
+    models/
+      token_extract.py          # 576 tokens × 32 layers + logit lens (disk-backed memmap)
+      clip_baseline_extract.py  # CLIP patch + projector baseline
+      extract_activations.py    # Mean-pooled extraction (cross-modal analysis)
+    analysis/
+      token_encoding.py         # Ridge per (token, layer, ROI) — spatial + streaming semantic
+      cross_modal.py            # Vis/txt token × visual/language ROI variance partition
+      neurolens_encoding.py     # Layer × ROI encoding with noise ceiling
+    data/
+      nsd_fsaverage.py          # NSD fsaverage beta loading + ROI masking
+      nsd_stim_reconstruct.py   # COCO + cropBox stimulus reconstruction
+      task_metadata.py          # shared1000 COCO annotation metadata
+    visualization/
+      token_maps.py             # F1 retinotopy, F2 logit lens, F3 spatial×semantic, F4 hierarchy
+    patching/
+      single_layer_sweep.py     # Per-layer ablation × 3 tasks
+      activation_patching.py    # Mean/zero/noise ablation
+  scripts/
+    run_token_pipeline.py       # Main orchestrator (extract/clip_baseline/spatial/semantic/visualize)
+    run_pipeline_v2.py          # V2 pipeline (cross-modal, encoding, sweep)
+    run_token_*.sh              # SLURM scripts for HPC3
+    run_clip_baseline.sh        # CLIP baseline SLURM
+    run_noise_ceiling.sh        # Noise ceiling SLURM
+    run_permutation_null.sh     # Permutation null SLURM
+  configs/
+    models.yaml                 # LLaVA / Qwen2-VL / InternVL2 specs
+    rois.yaml                   # Brain ROI definitions (19 ROIs)
 ```
 
-## Key Concepts
+## Key Design Decisions
 
-### Three Processing Stages
-- Stage 1 (Visual Encoding): Early LLM layers (0-10 for 32-layer models)
-- Stage 2 (Cross-Modal Fusion): Middle layers (11-22)
-- Stage 3 (Linguistic Refinement): Late layers (23-31)
+- **mean_r** (not best_r/max-over-voxels) as primary metric — avoids selection bias
+- **Disk-backed memmap** for token extraction — handles 150 GB activation tensor in 80 GB RAM
+- **Streaming semantic encoding** — builds per-layer word embeddings lazily to avoid 240 GB materialization
+- **CLIP baseline** separation — proves decoder adds brain alignment vs CLIP passthrough
 
-### Brain ROI Groups
-- visual_early: V1, V2, V3, V4 (ventral visual stream)
-- multimodal_integration: STS, Angular Gyrus, TPJ
-- language_network: Broca's area, Wernicke's area (left hemisphere)
-
-### Triple Dissociation (core causal contribution)
-Patching each stage selectively impairs its corresponding task type:
-- Patch Visual -> impairs object recognition
-- Patch Fusion -> impairs attribute-object binding
-- Patch Language -> impairs fluent generation
-
-## Running Experiments
+## Running (HPC3)
 
 ```bash
-# Setup
-conda env create -f implementation/environment.yml
-conda activate neurolens
+# Token extraction (GPU, ~20 min)
+sbatch scripts/run_token_extract.sh
 
-# Full pipeline (set paths first)
-export NSD_ROOT=/path/to/nsd
-export COCO_ROOT=/path/to/coco
+# CLIP baseline (GPU, ~10 min)
+sbatch scripts/run_clip_baseline.sh
 
-# Individual steps
-cd implementation
-python run_experiment.py --step extract --model llava --nsd-root $NSD_ROOT --coco-root $COCO_ROOT
-python run_experiment.py --step brain --model llava --nsd-root $NSD_ROOT --coco-root $COCO_ROOT
-python run_experiment.py --step rdms --model llava
-python run_experiment.py --step analyze --model llava
-python run_experiment.py --step patch --model llava
-python run_experiment.py --step visualize --model llava
+# Spatial encoding (CPU+GPU, ~2h) — depends on extraction
+sbatch --dependency=afterok:<extract_job> scripts/run_token_spatial.sh
 
-# Or run everything
-python run_experiment.py --step all --model all --nsd-root $NSD_ROOT --coco-root $COCO_ROOT
+# Semantic encoding (CPU+GPU, ~3h) — depends on extraction
+sbatch --dependency=afterok:<extract_job> scripts/run_token_semantic.sh
 
-# HPC submission
-./scripts/run_all.sh $NSD_ROOT $COCO_ROOT
+# Statistical tests
+sbatch scripts/run_noise_ceiling.sh
+sbatch scripts/run_permutation_null.sh
+
+# Figures (after spatial+semantic done)
+sbatch --dependency=afterok:<spatial>:<semantic> scripts/run_token_visualize.sh
 ```
 
 ## Models
-- LLaVA-1.5-7B (primary): liuhaotian/llava-v1.5-7b, 32 layers
-- Qwen2-VL-7B: Qwen/Qwen2-VL-7B-Instruct, 28 layers
-- InternVL2-8B: OpenGVLab/InternVL2-8B, 32 layers
+- LLaVA-1.5-7B (primary): CLIP-ViT-L/14-336px + MLP + LLaMA-2-7B, 32 layers, 576 vision tokens
+- Qwen2-VL-7B (planned): SigLIP + Qwen2, 28 layers
+- InternVL2-8B (planned): InternViT + InternLM2, 32 layers
 
 ## Git Workflow
-- Branch: `neurolens` (development)
-- Merge to `master` after experiments confirm results
+- `main`: clean codebase on GitHub
+- `review/gpt-pro-fixes`: current working branch with review checklist
+- `neurolens`: local dev branch (contains git history with large files, not pushed)
