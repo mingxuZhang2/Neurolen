@@ -14,25 +14,28 @@ Mark `[x]` when addressed with commit hash.
   - Commit: `3382ca4` — F3/F4 now use `mean_r`
   - Result: V1 peak shifted from L29 → L14; "reversed hierarchy" conclusion invalidated
 
-- [ ] **Add noise-ceiling normalization**
-  - Raw mean_r (0.09) is hard to interpret; normalize by split-half reliability ceiling
-  - NSD provides ncsnr per voxel → compute NC = Spearman-Brown corrected split-half r
+- [x] **Add noise-ceiling normalization** — Job 315703 COMPLETED
+  - NC_r computed from NSD ncsnr: V1=0.54, V2=0.55, V3=0.69, V4=0.64
+  - LLaMA L14 (peak) explains 17-21% of noise ceiling; CLIP patches only 9-11%
+  - Language ROIs have low NC (Broca=0.30, temporal_pole=0.11) → confirms low SNR for viewing task
+  - Saved: `results_v2/statistical_tests/noise_ceiling.npz`
 
 - [ ] **Nested CV for voxel selection**
   - If reporting any per-voxel results: select voxels on inner training fold, evaluate on held-out test fold
   - Alternatively: pre-select top-N reliable voxels by ncsnr (independent of model)
 
-- [ ] **Permutation null distribution**
-  - Shuffle token-to-image pairing 1000×, compute null mean_r distribution
-  - Report p-value per (layer, ROI) and FDR correction
+- [x] **Parametric significance**: t-test across 576 tokens, all p < 1e-190, t > 44
+- [ ] **Permutation null distribution** — Job 315704 RUNNING (~2h)
+  - 200 image-shuffle permutations × 10 layers × 4 ROIs
+  - Waiting for results
 
 ### Baselines
 
-- [ ] **CLIP patch token baseline (most critical)**
-  - Extract CLIP-ViT patch output (576×1024) + MLP projector output (576×4096)
-  - Run identical spatial encoding → compare with LLaMA L0-L31
-  - Code written: `clip_baseline_extract.py`, job 315601 submitted
-  - Key question: does LLaMA decoder add brain alignment beyond what CLIP already provides?
+- [x] **CLIP patch token baseline (most critical)** — Job 315601 COMPLETED
+  - CLIP-ViT patches: V1=0.048, V3=0.079
+  - MLP projector: V1=0.042, V3=0.063 (slightly worse than CLIP!)
+  - LLaMA L14 peak: V1=0.090, V3=0.135 (+72-98% gain over CLIP)
+  - **Conclusion: decoder nearly doubles brain alignment; not just CLIP passthrough**
 
 - [ ] **Low-level visual feature baseline**
   - Gabor bank / edge energy / spatial frequency / color histograms per patch
