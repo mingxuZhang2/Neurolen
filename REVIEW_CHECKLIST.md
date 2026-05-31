@@ -1,7 +1,14 @@
 # GPT-5.5 Pro Review Checklist
 
-Based on R1 review (2026-05-27) + R2 code review + R3 narrative review.
-Mark `[x]` when addressed. Last updated: 2026-05-27 21:45 CST.
+Based on R1 review (2026-05-27) + R2 code review + R3 narrative review + R4 literature-positioning
+review (2026-05-31). Mark `[x]` when addressed. Last updated: 2026-05-31 CST.
+
+> **R4 strategic reframe (current direction):** the project spine is now the **SemReps-8K
+> cross-modal encoding (N=6)**, which answers the committed core question and survives the
+> architecture controls. The NSD token-level decoder-gain story (Findings 1–3 below) is **demoted
+> to supporting mechanism** because (a) our own random-LLaMA control suggests the decoder gain is
+> largely *architecture, not training*, and (b) the "prompt-invariant memory bank" is partly a
+> causal-mask necessity. See the R4 section near the bottom for the full status.
 
 ---
 
@@ -87,9 +94,17 @@ One exception: AG=0.038 for generated tokens (highest of all streams) — weak s
 | Broca | 0.303 | Low SNR — viewing task not ideal for language ROIs |
 | temporal_pole | 0.111 | Very low SNR |
 
-### Revised paper thesis
+### Revised paper thesis (R4)
 
-> A language decoder amplifies human visual-cortical alignment of image tokens without linguisticizing them. Image tokens serve as a prompt-invariant visual memory bank; vision-to-language conversion occurs through sequence-position routing via causal self-attention, not through token-internal transformation.
+> An MLLM's image and text processing map onto the human brain's *seeing/reading* division in a
+> **modality-specific but asymmetric** way: vision tokens align tightly and specifically with
+> visual cortex (image→SEE strong, image→READ near zero, 6/6 subjects), whereas caption features
+> align only weakly and mainly in language IFG. The token-level NSD mechanism (decoder reshaping a
+> visual memory bank, cross-position routing) is supporting detail, with the decoder gain flagged
+> as plausibly architecture-driven rather than language-specific.
+
+> (superseded R3 thesis: "A language decoder amplifies visual-cortical alignment of image tokens
+> without linguisticizing them …" — demoted to supporting mechanism per R4.)
 
 ---
 
@@ -166,6 +181,46 @@ One exception: AG=0.038 for generated tokens (highest of all streams) — weak s
 
 ---
 
+## GPT Pro R4 Concerns (literature-positioning, 2026-05-31) — Status
+
+### Strategic / framing
+
+| Concern | Status | Resolution |
+|---|---|---|
+| Recommended headline "Language Decoders Amplify Visual-Cortical Alignment" | ⚠️ Rejected as headline | Undercut by our own random-LLaMA control (architecture, not training) — reviewer would sink it. Demoted to supporting mechanism. |
+| SemReps treated only as "external validation" (Claim D) | ✅ Reframed | SemReps cross-modal is now the **spine** (it is MLLM-specific and on-question); NSD is support. |
+| "no linguisticization" too strong | ✅ Softened | README: "no positive evidence under current probes"; NSD language-ROI low SNR noted. |
+| "prompt-invariant memory bank" reads as a discovery | ✅ Softened | README S2 caveat: cosine=1.000 is largely forced by the causal mask (image precedes prompt). |
+| Over-strong "MLLM three-stage == brain three-stage" analogy | ✅ Avoided | Framed as "computationally resembles," not "proves same mechanism." |
+
+### P0 (must close before main-conference submission) — endorsed
+
+| Item | Status | Note |
+|---|---|---|
+| Lock encoding pipeline (fold-local PCA/scaler/ridge, no leakage) | 🔄 NSD rerun in progress | SemReps multi already fits PCA/scaler inside per-subject train only. |
+| Permutation null on encoding r + FDR | ⬜ Pending | SemReps N=6 currently uses across-subject random-effects t (large effects); add shuffle null. |
+| Statistical unit = subject / image bootstrap, not 576 tokens | ✅ Done for SemReps | N=6 significance is paired t across subjects. |
+| Baseline expansion (CLIP layer sweep, DINOv2, low-level Gabor, random features) | ⬜ Planned | Applies to whichever leg is headlined. |
+| Multi-subject + both hemispheres | 🟡 Partial | SemReps N=6 done (LH); RH is a cheap add (features hemisphere-independent). NSD still subj01. |
+| Re-verify random-LLaMA magnitude from HPC3 logs | ⬜ TODO | Prerequisite to deciding if the NSD decoder-gain line is salvageable at all. |
+
+### P1 (turns it into a strong paper) — endorsed
+
+| Item | Status | Note |
+|---|---|---|
+| **Matching-level cross-modal analysis** (the real test of the core question) | ⬜ Key next step | Does the MLLM's own image↔caption matching signal track the brain's matching activity? Current result is per-modality alignment only. |
+| Rule out CLIP-richer-than-text confound for SEE>READ asymmetry | ⬜ Pending | Control feature richness before attributing asymmetry to cross-modal processing. |
+| pRF / retinotopy sanity check | ⬜ Data ready | |
+| Causal patching / ablation (link brain-aligned tokens to behavior) | ⬜ Planned | |
+| Multi-model replication (Qwen2-VL, InternVL2, LLaVA-NeXT) | ⬜ Planned | |
+| Teacher-forced captions / caption-embedding probes | ⬜ Planned | Fairer linguisticization test. |
+
+### Predicted reviewer scores (R4, current state)
+Novelty 7 · Significance 5 now / 7 potential · Soundness 4–5 now / 7 after P0 · Clarity 7 · Repro 5.
+Verdict: strong workshop / promising preprint; main-conference borderline only after P0 + matching-level test.
+
+---
+
 ## Experiment Completion Matrix
 
 | Experiment | R1 | R2 | R3 | Status |
@@ -188,6 +243,6 @@ One exception: AG=0.038 for generated tokens (highest of all streams) — weak s
 
 ## Git Branch Status
 
-- `main`: clean codebase baseline
-- `review/gpt-pro-fixes`: all fixes + new experiments (current working branch)
-- Commits since R1: mean_r fix, CLIP baseline, noise ceiling, 5-fold CV, token-level extraction with memmap, sequence-position dissociation, multi-prompt, raw 4096-d extraction, joblib parallelization
+- `main`: synced to working branch as of N=6 results (fast-forward)
+- `review/gpt-pro-fixes`: current working branch
+- Recent: SemReps N=6 encoding + noise ceiling + significance, R4 reframe (SemReps spine, NSD demoted)

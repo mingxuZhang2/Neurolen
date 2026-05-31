@@ -1,16 +1,27 @@
 # NeuroLens
 
-Token-level MLLM–brain alignment: how LLaVA's 576 vision tokens map to human visual cortex across 32 decoder layers, using NSD 7T fMRI.
+MLLM–brain cross-modal alignment: does LLaVA's image/text processing map onto the human brain's
+seeing/reading division? Spine = SemReps-8K (6 subjects view images + read captions); NSD 7T
+token-level analysis provides supporting mechanism.
 
-## Current Status (2026-05-27)
+## Current Status (2026-05-31)
 
-**Core finding**: LLaMA decoder reshapes CLIP vision tokens to be ~2× more brain-aligned (mean_r +72-98% over CLIP patches), peaking at mid-layers (L13-14). Vision tokens remain visual throughout — they never become linguistic.
+**Spine = SemReps-8K cross-modal encoding (N=6).** Core finding: MLLM–brain alignment is
+**modality-specific and asymmetric** — vision tokens align tightly and *specifically* with visual
+cortex (image→SEE within≫cross, 6/6 subjects, p<0.01 in 4 ROIs; image→READ ≈ 0), while caption
+features align only weakly and mainly in language IFG. See [SEMREPS_N6_FINDINGS.md](SEMREPS_N6_FINDINGS.md).
 
-**Completed**: token extraction, spatial encoding (V1-V4), semantic encoding (Broca/IFG), CLIP baseline, noise ceiling, parametric tests.
-**Running**: permutation null test.
-**Pending**: 8 subjects, multi-MLLM, expanded ROIs, causal ablation.
+**Supporting (NSD token-level, subj01):** mid-decoder image tokens predict visual cortex better
+than CLIP (+60–88% @L14); image tokens act as a prompt-invariant visual memory bank; conversion
+looks like cross-position routing. **Demoted** because the decoder gain is plausibly architecture
+(random-LLaMA control) and prompt-invariance is partly a causal-mask necessity.
 
-See [README.md](README.md) for full results and [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) for review status.
+**Completed**: SemReps N=6 encoding + LOO noise-ceiling + across-subject significance; NSD token
+extraction, spatial/semantic encoding, CLIP baseline, sequence-position dissociation.
+**Key next (P0/P1)**: matching-level cross-modal test (the real core-question test), permutation
+null, baseline expansion, re-verify random-LLaMA magnitude, RH/multi-subject, causal ablation.
+
+See [README.md](README.md) for results and [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) (R4) for review status.
 
 ## Project Structure
 

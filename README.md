@@ -1,107 +1,136 @@
-# NeuroLens: Token-Level MLLM–Brain Alignment
+# NeuroLens: MLLM–Brain Cross-Modal Alignment
 
-Maps how LLaVA's internal representations align with human visual cortex across sequence positions (image/prompt/generated tokens) and 32 decoder layers, using NSD 7T fMRI.
+Does the way a multimodal LLM (LLaVA-1.5-7B) processes images and text align with how the
+human brain performs **cross-modal matching**? We test this with SemReps-8K (6 subjects who
+both *view images* and *read captions* of the same COCO scenes), backed by token-level
+mechanistic analysis on NSD 7T fMRI.
 
 ## Core Question
 
-> A language decoder does not linguisticize image tokens — it amplifies their visual-cortical alignment. Where, then, does vision-to-language conversion actually happen?
+> When an MLLM relates an image to its caption, does its internal image/text processing map
+> onto the brain's own division between *seeing* and *reading* — or onto something else?
 
-## Three Main Findings (subj01 preliminary)
+---
 
-### Finding 1: Language decoder amplifies visual-cortical alignment (+72–98% over CLIP)
+## Main line — SemReps-8K cross-modal encoding (N=6)
 
-The LLaMA decoder does not merely pass CLIP features through — it actively reshapes vision tokens to better match human visual cortex.
+Per-subject encoding model (StandardScaler → PCA-512 → RidgeCV), fit on each subject's *own
+disjoint* train betas (~4k COCO items), evaluated on the shared 70-item test set.
+`within` = MLLM features predict the *matched* modality's brain response (image→SEE,
+caption→READ); `cross` = predict the *other* modality. `within ≫ cross` = modality-specific
+alignment. Subjects sub-01/02/03/04/05/07, left hemisphere.
 
-| Stage | V1 | V2 | V3 | V4 |
-|---|---|---|---|---|
-| CLIP-ViT patches (before decoder) | 0.048 | 0.047 | 0.079 | 0.072 |
-| MLP projector (after projection) | 0.042 | 0.040 | 0.063 | 0.060 |
-| **LLaMA L14 (decoder peak)** | **0.090** | **0.094** | **0.135** | **0.132** |
+**Headline: MLLM–brain alignment is modality-specific *and asymmetric*.**
 
-- Decoder gain: **+72% (V3) to +98% (V2)** over CLIP patches
-- MLP projector *slightly hurts* alignment (optimizes for LLM compatibility, not brain-likeness)
-- Confirmed with 5-fold CV (mean_r): V1 0.049→0.082, V2 0.047→0.088, V3 0.085→0.136, V4 0.075→0.132
+- **SEE pathway — strong, clean, replicated 6/6.** MLLM vision tokens align to visual cortex
+  and *only* visual cortex; `within ≫ cross` in every visual/association ROI.
+- **READ pathway — weak and fuzzy.** Alignment concentrates in language/parietal regions, but
+  the modality boundary blurs (vision features partly predict reading too) and the brain's
+  reading signal is itself low-SNR. Only language IFG shows a significant modality-specific gap.
 
-**Noise-ceiling normalized**: LLaMA L14 explains **17–21% of noise ceiling** for V1–V4; CLIP patches only 9–11%.
+### SEE leg — within vs cross (paired t across 6 subjects, peak layer)
 
-### Finding 2: Image tokens are a prompt-invariant visual memory bank
+| ROI | within | cross | diff | t | p | sign |
+|---|---|---|---|---|---|---|
+| early_visual | +0.164 | −0.002 | +0.166 | 5.28 | 0.0033 | 6/6 |
+| ventral_visual | +0.129 | +0.028 | +0.101 | 4.49 | 0.0065 | 6/6 |
+| lateral_temporal | +0.085 | +0.027 | +0.058 | 4.81 | 0.0048 | 6/6 |
+| parietal_assoc | +0.193 | +0.033 | +0.160 | 7.73 | 0.0006 | 6/6 |
+| language_ifg | +0.048 | +0.017 | +0.031 | 1.99 | 0.1027 | 5/6 |
 
-Three-stream comparison (image tokens vs prompt tokens vs generated tokens) against 11 brain ROIs:
+within-vs-0 one-sample t: early_visual t=10.3 (p=0.0001), parietal t=9.2 (p=0.0003).
 
-| Stream | V1 | V3 | FFA | PPA | EBA | STS | AG | Broca |
-|---|---|---|---|---|---|---|---|---|
-| **Image tokens** | 0.109 | 0.163 | **0.240** | **0.238** | **0.265** | 0.015 | 0.027 | 0.040 |
-| Prompt tokens | 0.111 | 0.167 | 0.231 | 0.221 | 0.260 | 0.008 | 0.017 | 0.023 |
-| Generated tokens | 0.081 | 0.124 | 0.206 | 0.199 | 0.239 | 0.019 | **0.038** | 0.024 |
+### READ leg — only language IFG dissociates
 
-**Key observations**:
-- **Image tokens dominate category-selective cortex**: FFA (face), PPA (scene), EBA (body) — consistently highest encoding
-- **Generated tokens lose visual information**: 24–43% weaker than image tokens across V1–V4
-- **Language/semantic ROIs are near zero for all streams**: NSD is a viewing task, Broca NC is only 0.30
-- **One exception — angular gyrus**: generated tokens show the highest AG encoding (0.038), hinting at semantic integration at output positions
+ventral +0.032/+0.031 (p=0.88, no dissociation), parietal +0.094/+0.079 (p=0.41),
+lateral_temporal +0.062/+0.044 (p=0.13), **language_ifg +0.067/+0.035 (p=0.021, 5/6)**.
 
-### Finding 3: Vision-to-language conversion happens between positions, not within tokens
+### Noise-ceiling normalized (model_r / LOO inter-subject ceiling)
 
-The layer × stream trajectory tells a clear story:
+| ROI | SEE | READ |
+|---|---|---|
+| early_visual | 1.14 | 0.39 |
+| ventral_visual | 1.27 | 0.22 |
+| lateral_temporal | 1.26 | 0.62 |
+| parietal_assoc | 1.46 | 0.95 |
+| language_ifg | 0.44 | 0.74 |
 
-**V3 encoding by layer (representative visual ROI)**:
+SEE norm ≈ 1 (per-subject encoders capture subject-specific tuning the across-subject ceiling
+washes out) → MLLM vision features ~saturate the explainable SEE signal. READ ceiling is
+intrinsically low (0.014–0.028 vs SEE 0.04–0.09), so raw READ r looks poor but normalizes to
+0.74–0.95 in language/parietal.
 
-| Layer | Image tokens | Prompt tokens | Generated tokens |
-|---|---|---|---|
-| L0 | 0.134 | 0.134 | 0.133 |
-| L8 | 0.159 | 0.173 | 0.116 |
-| L14 | 0.174 | 0.170 | 0.136 |
-| L16 | **0.181** | 0.173 | 0.134 |
-| L24 | 0.167 | 0.176 | 0.112 |
-| L31 | 0.156 | 0.161 | 0.112 |
+### What this does *not* yet show (honest gaps)
 
-- Image tokens: rise to mid-layer peak then gently decline — **visual memory bank** being formatted
-- Prompt tokens: stable, slightly below image tokens — **intermediate readout**
-- Generated tokens: **monotonically decline** from L0 to L31 — visual info consumed, converted to language output
+- **It is per-modality representational alignment, not matching-level alignment.** The cleanest
+  test of the core question is whether the MLLM's *own* image↔caption matching signal tracks the
+  brain's matching activity. That experiment is **not yet run** and is the key next step.
+- The SEE>READ asymmetry may partly reflect that CLIP vision features are simply richer than
+  short-caption text features — a feature-quality confound to rule out, not assume away.
+- 70 test items, left hemisphere only, READ low-SNR. Significance above is a random-effects test
+  *across* 6 subjects (large effect sizes); a permutation null on the encoding r is still pending.
 
-**Interpretation**: Under current probes, there is no evidence that MLLM transforms image tokens into language tokens. Image tokens remain a visual substrate throughout all 32 layers. The decoder amplifies their visual-cortical alignment at mid-layers, then generated tokens read from this substrate via causal self-attention over the image prefix and produce language output — losing visual information in the process.
+Artifacts: `SEMREPS_N6_FINDINGS.md`, `encoding_results_multi.json`, `noise_ceiling_results.json`,
+`encoding_significance_n6.json`.
 
-This division of labor is reminiscent of cortical specialization: visual information flows from visual cortex to language areas through inter-area connections, not intra-area transformation.
+---
 
-## Statistical Rigor
+## Supporting mechanism — NSD token-level analysis (subj01, preliminary)
 
-- **Primary metric**: `mean_r` (mean Pearson r across all voxels in ROI) — avoids selection bias of `max_r`
-- **Noise ceiling**: NC_r from NSD ncsnr; V1–V4 NC = 0.54–0.69; language ROIs NC = 0.11–0.37
-- **Cross-validation**: 5-fold CV with fold-local PCA and standardization (final evaluator)
-- **Parametric significance**: all (layer, ROI) one-sample t-test across 576 tokens: t > 44, p < 10⁻¹⁹⁰
-- **Permutation null**: image-shuffle test (running)
-- **CLIP baseline**: separates CLIP-frontend from decoder contribution
+These results motivate *how* MLLM vision tokens carry visual-cortical structure. They are
+**supporting evidence**, not the main claim, and carry important caveats (below).
 
-## Methods
+**S1 — Mid-decoder image-token states predict visual cortex better than CLIP patches**
+(+60–88% over CLIP at L14; MLP projector slightly *hurts*). 5-fold CV mean_r V1 0.049→0.082,
+V3 0.085→0.136; NC-normalized L14 explains 17–21% of ceiling vs CLIP 9–11%.
 
-### Data
-- **Brain**: NSD 7T fMRI, subj01, fsaverage surface, LH, 22/40 sessions, 602/1000 shared images
-- **Model**: LLaVA-1.5-7B (CLIP-ViT-L/14-336px → MLP projector → LLaMA-2-7B, 32 layers, 576 vision tokens)
-- **Stimuli**: shared1000 COCO natural images
+**S2 — Image tokens behave as a prompt-invariant visual memory bank.** Image tokens dominate
+category-selective cortex (FFA 0.240 / PPA 0.238 / EBA 0.265); generated tokens lose 24–43% of
+V1–V4 visual info; cross-prompt cosine = 1.000 for image tokens.
 
-### Experiments
+**S3 — Vision→language conversion looks like cross-position routing, not within-token
+linguisticization.** Image tokens stay visual across all 32 layers; generated tokens read the
+image prefix via causal self-attention and decline monotonically in visual content.
 
-**Experiment 1 — Token-level spatial encoding** (576 tokens × 32 layers × V1/V2/V3/V4):
-For each (token i, layer L, ROI R): Ridge regression from token activation (256-d) to ROI voxel responses. 73,728 Ridge models total.
+### Caveats that reposition S1–S3 as *supporting* (and that a reviewer will raise)
 
-**Experiment 2 — CLIP baseline** (CLIP patches + projector output × V1/V2/V3/V4):
-Same encoding pipeline on pre-decoder representations. Isolates decoder contribution.
+1. **S1 may be architecture, not language/training.** Our own control (`run_exp_random_llama.sh`)
+   randomizes the decoder weights; NSD-phase records indicate the alignment gain largely *survives*
+   randomization → the effect is plausibly transformer-depth, not LLaVA-specific learning. This is
+   the main reason the NSD decoder-gain story is **not** the headline. (Exact magnitudes to be
+   re-verified from the HPC3 logs before any write-up.)
+2. **S2's prompt-invariance is partly structural.** Image tokens precede the prompt under a causal
+   mask, so they *cannot* attend forward to it — cosine = 1.000 is largely forced by architecture,
+   not a surprising discovery. The non-trivial part is that this bank becomes more brain-aligned at
+   mid-layers, not that it is prompt-invariant.
+3. **S3's "no linguisticization" is probe-limited.** Logit-lens and language-ROI signals are near
+   zero, but NSD is a passive *viewing* task with low language-ROI SNR (Broca NC 0.30). The safe
+   claim is "no positive evidence of linguisticization under current probes," not a proof of absence.
 
-**Experiment 3 — Sequence-position dissociation** (image/prompt/generated × 10 layers × 11 ROIs):
-Mean-pooled hidden states per position stream, encoded to expanded ROI set including FFA/PPA/EBA/STS/AG/Broca/IFG.
+---
 
-**Experiment 4 — Semantic encoding via logit lens** (576 tokens × 32 layers × Broca/IFG/auditory/temporal):
-Logit-lens top-10 words → word embedding average → Ridge to language ROIs. Result: ~0 everywhere.
+## Statistical rigor & open requirements
 
-## Current Limitations
+- **Primary metric**: `mean_r` over voxels (avoids `max_r` selection bias). SemReps adds
+  noise-ceiling normalization (LOO inter-subject reliability).
+- **Statistical unit**: subject-level (random effects) / image-level bootstrap — **not** the 576
+  tokens (token-level t-tests are sanity checks only; tokens are not independent).
+- **Pending P0 (must close before a main-conference submission):**
+  - Lock the encoding pipeline: fold-local PCA + scaler + ridge, no leakage (NSD gold-standard rerun).
+  - Permutation null / label-shuffle on the encoding r, with FDR correction.
+  - Baseline expansion: CLIP layer sweep, DINOv2 / low-level Gabor / random features.
+  - Multi-subject + both hemispheres (SemReps is N=6 LH; NSD subj01 only).
+- **Pending P1:** matching-level cross-modal analysis (the core test), pRF retinotopy sanity check,
+  causal ablation/patching, multi-model replication (Qwen2-VL, InternVL2), caption-embedding probes.
 
-1. **Single subject** (subj01 only; subj02-08 downloading)
-2. **Left hemisphere only** (cannot verify contralateral retinotopy)
-3. **602/1000 images** (22/40 NSD sessions)
-4. **Single MLLM** (LLaVA; Qwen2-VL and InternVL2 planned)
-5. **Language ROIs poorly suited** for NSD viewing task (low noise ceiling)
-6. **PCA leakage**: Current main results use 5-fold CV on pre-PCA'd features. Gold-standard raw 4096-d with fold-local PCA rerun in progress.
-7. **No pRF retinotopy validation** yet (planned)
+See [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) for the full item-by-item status.
+
+## Methods (data)
+
+- **SemReps-8K** (OpenNeuro ds007272): 6 subjects view images and read captions of COCO scenes;
+  fsaverage surface betas; disjoint per-subject train stimuli; shared 70-item test (see+read).
+- **NSD** 7T fMRI, subj01, fsaverage LH, shared1000 COCO (supporting analysis).
+- **Model**: LLaVA-1.5-7B (CLIP-ViT-L/14-336px → MLP projector → LLaMA-2-7B, 32 layers, 576 tokens).
 
 ## Project Structure
 
@@ -111,34 +140,21 @@ implementation/
     models/
       token_extract.py          # 576 tokens × 32 layers + logit lens (disk-backed memmap)
       clip_baseline_extract.py  # CLIP patch + projector baseline
-      sequence_extract.py       # Image/prompt/generated token extraction with generation
-      extract_activations.py    # Mean-pooled extraction (cross-modal analysis)
+      sequence_extract.py       # Image/prompt/generated token extraction
+      extract_activations.py    # Mean-pooled extraction (cross-modal)
     analysis/
-      token_encoding.py         # Ridge per (token, layer, ROI) with joblib parallelism
+      token_encoding.py         # Ridge per (token, layer, ROI)
       cross_modal.py            # Vis/txt token × visual/language ROI encoding
     data/
       nsd_fsaverage.py          # NSD beta loading + ROI masking
-      nsd_stim_reconstruct.py   # COCO + cropBox stimulus reconstruction
-    visualization/
-      token_maps.py             # F1-F4 figure series
   scripts/
-    run_token_pipeline.py       # Orchestrator
-    run_sequence_dissociation.sh # Step 2: position dissociation
-    run_final_spatial.sh        # 5-fold CV spatial encoding
-    run_clip_baseline.sh        # CLIP baseline
-    run_noise_ceiling.sh        # NC computation
-    run_permutation_null.sh     # Image-shuffle null
+    run_semreps_encoding_multi.py / run_semreps_encoding_n6.sh   # SemReps N=6 main line
+    run_semreps_noise_ceiling.py                                  # LOO noise-ceiling
+    run_semreps_download_betas.sh / _images.py / _extract_s457.sh # SemReps data pipeline
+    run_exp_random_llama.sh / run_exp_random_proj.sh              # architecture controls
+    run_token_pipeline.py, run_final_spatial.sh, run_clip_baseline.sh  # NSD supporting line
 ```
 
-## Next Steps (per GPT-5.5 Pro review)
-
-1. **Complete 5-fold final spatial** (running) — confirm decoder gain holds under proper CV
-2. **Permutation null** (running) — non-parametric significance
-3. **8 subjects + both hemispheres** — required for publication
-4. **pRF retinotopy validation** — does token grid map to cortical coordinates?
-5. **Multi-MLLM** (Qwen2-VL, InternVL2) — architecture generality
-6. **Causal ablation** — link brain-aligned tokens to model behavior
-
-## Review Status
-
-See [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) for GPT-5.5 Pro review items and fix status.
+## Models
+- LLaVA-1.5-7B (primary): CLIP-ViT-L/14-336 + MLP + LLaMA-2-7B, 32 layers, 576 vision tokens
+- Qwen2-VL-7B / InternVL2-8B (planned, for architecture generality)

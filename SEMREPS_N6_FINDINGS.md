@@ -62,6 +62,13 @@ features ~saturate the explainable SEE signal. READ ceiling is intrinsically low
 
 ## Caveats / not-yet-done
 
+- **This is per-modality representational alignment, not matching-level alignment.** The core
+  question ("does MLLM image↔text processing == human cross-modal matching?") is most directly
+  answered by testing whether the MLLM's *own* image-caption matching signal tracks the brain's
+  matching activity. That experiment is the key next step and is **not yet run**.
+- **CLIP-richer-than-text confound.** The SEE>READ asymmetry may partly reflect that CLIP vision
+  features are simply richer than short-caption text features, rather than a property of
+  cross-modal processing. Control feature richness before attributing the asymmetry to mechanism.
 - Magnitude: raw r ≈ 0.16 is modest in absolute terms but normal-to-strong for single-item 7T
   fMRI encoding; normalized it saturates the ceiling.
 - Significance above is a random-effects test *across* 6 subjects (large effect sizes, t=5–10).
