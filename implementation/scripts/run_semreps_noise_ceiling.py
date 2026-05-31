@@ -19,7 +19,7 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 from pathlib import Path
-import json, logging, gc, sys
+import os, json, logging, gc, sys
 
 sys.path.insert(0, str(Path(__file__).parent))
 import run_semreps_encoding_multi as E  # validated helpers + constants
@@ -27,7 +27,7 @@ import run_semreps_encoding_multi as E  # validated helpers + constants
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
 logger = logging.getLogger('noiseceil')
 
-SUBJECTS = ['sub-01', 'sub-02', 'sub-03']
+SUBJECTS = os.environ.get('SR_SUBS', 'sub-01,sub-02,sub-03,sub-04,sub-05,sub-07').split(',')
 THRESH = 0.15           # reliable-vertex cutoff on the ceiling
 LAYERS = E.LAYERS
 GRAD = E.GRAD
