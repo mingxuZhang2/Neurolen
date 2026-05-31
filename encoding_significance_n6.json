@@ -1,0 +1,126 @@
+{
+  "n_subjects": 6,
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-04",
+    "sub-05",
+    "sub-07"
+  ],
+  "test": "paired t-test within-vs-cross across subjects + one-sample within-vs-0, at peak-within layer",
+  "see": {
+    "early_visual": {
+      "peak_layer": 14,
+      "within_mean": 0.16420397659142813,
+      "cross_mean": -0.001743458987524112,
+      "diff_mean": 0.16594743557895222,
+      "paired_t": 5.2780040491848395,
+      "paired_p": 0.003250282769107889,
+      "n_pos": 6,
+      "within_vs0_t": 10.344382793754693,
+      "within_vs0_p": 0.00014529495112665798
+    },
+    "ventral_visual": {
+      "peak_layer": 8,
+      "within_mean": 0.12894556298851967,
+      "cross_mean": 0.02809337309251229,
+      "diff_mean": 0.10085218989600737,
+      "paired_t": 4.486923718122022,
+      "paired_p": 0.006477163844144284,
+      "n_pos": 6,
+      "within_vs0_t": 5.185426320885606,
+      "within_vs0_p": 0.0035093926812163195
+    },
+    "lateral_temporal": {
+      "peak_layer": 8,
+      "within_mean": 0.08450970488289992,
+      "cross_mean": 0.026635822374373674,
+      "diff_mean": 0.05787388250852624,
+      "paired_t": 4.811977601302384,
+      "paired_p": 0.0048324086472664295,
+      "n_pos": 6,
+      "within_vs0_t": 10.691242403113337,
+      "within_vs0_p": 0.00012396297605162543
+    },
+    "parietal_assoc": {
+      "peak_layer": 12,
+      "within_mean": 0.19337032486995062,
+      "cross_mean": 0.033099834341555834,
+      "diff_mean": 0.1602704905283948,
+      "paired_t": 7.729945611174304,
+      "paired_p": 0.0005788133690175136,
+      "n_pos": 6,
+      "within_vs0_t": 9.22774646742581,
+      "within_vs0_p": 0.00025100120221224927
+    },
+    "language_ifg": {
+      "peak_layer": 8,
+      "within_mean": 0.04754320780436198,
+      "cross_mean": 0.016599763883277774,
+      "diff_mean": 0.030943443921084206,
+      "paired_t": 1.9942531454709356,
+      "paired_p": 0.10269048120458495,
+      "n_pos": 5,
+      "within_vs0_t": 8.320475565210524,
+      "within_vs0_p": 0.0004098213122689719
+    }
+  },
+  "read": {
+    "early_visual": {
+      "peak_layer": 16,
+      "within_mean": 0.03081592172384262,
+      "cross_mean": 0.015255649263660112,
+      "diff_mean": 0.015560272460182508,
+      "paired_t": 1.2181023837638711,
+      "paired_p": 0.2775237965983163,
+      "n_pos": 4,
+      "within_vs0_t": 2.608614661002172,
+      "within_vs0_p": 0.047749635644807636
+    },
+    "ventral_visual": {
+      "peak_layer": 8,
+      "within_mean": 0.032327677976960935,
+      "cross_mean": 0.03122595449288686,
+      "diff_mean": 0.001101723484074076,
+      "paired_t": 0.16149664515340711,
+      "paired_p": 0.8780251721207052,
+      "n_pos": 3,
+      "within_vs0_t": 2.9663617877443333,
+      "within_vs0_p": 0.03128818265626764
+    },
+    "lateral_temporal": {
+      "peak_layer": 12,
+      "within_mean": 0.06185199972242117,
+      "cross_mean": 0.044176263734698296,
+      "diff_mean": 0.017675735987722874,
+      "paired_t": 1.790546034112651,
+      "paired_p": 0.13337119380948645,
+      "n_pos": 4,
+      "within_vs0_t": 6.372337573417457,
+      "within_vs0_p": 0.0014078065308547577
+    },
+    "parietal_assoc": {
+      "peak_layer": 12,
+      "within_mean": 0.0937034251789252,
+      "cross_mean": 0.07851968333125114,
+      "diff_mean": 0.015183741847674051,
+      "paired_t": 0.9056287926314963,
+      "paired_p": 0.4066546141642343,
+      "n_pos": 2,
+      "within_vs0_t": 7.049340066268994,
+      "within_vs0_p": 0.000887573138896224
+    },
+    "language_ifg": {
+      "peak_layer": 12,
+      "within_mean": 0.06691715059181054,
+      "cross_mean": 0.03516054525971413,
+      "diff_mean": 0.03175660533209642,
+      "paired_t": 3.303104743766862,
+      "paired_p": 0.021402202958109833,
+      "n_pos": 5,
+      "within_vs0_t": 9.02890239885513,
+      "within_vs0_p": 0.0002784064981745166
+    }
+  }
+}
