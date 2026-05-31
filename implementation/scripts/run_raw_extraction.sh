@@ -23,11 +23,16 @@ echo "Date: $(date)"
 LLAVA_PATH=${LLAVA_PATH:-$PROJECT_DIR/models/llava-v1.5-7b}
 
 # Extract with pca_dim=0 (no PCA, save raw 4096-d) for representative layers
+# Symlink stimuli so the pipeline can find manifest.json
+RAW_DIR=$PROJECT_DIR/results_v2_raw
+mkdir -p $RAW_DIR
+ln -sf $PROJECT_DIR/results_v2/stimuli_shared1000 $RAW_DIR/stimuli_shared1000
+
 $PY $PROJECT_DIR/implementation/scripts/run_token_pipeline.py \
     --step extract \
     --model llava \
     --model-path-override $LLAVA_PATH \
-    --output-root $PROJECT_DIR/results_v2_raw \
+    --output-root $RAW_DIR \
     --pca-dim 0 \
     --top-k 10
 
