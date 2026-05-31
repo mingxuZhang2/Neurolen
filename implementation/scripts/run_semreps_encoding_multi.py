@@ -46,8 +46,10 @@ ROI_GROUPS = {
 GRAD = ['early_visual', 'ventral_visual', 'lateral_temporal', 'parietal_assoc', 'language_ifg']
 
 # image-feature and caption-feature sources (each: coco_ids + layer_{L})
-IMG_SRC = ['semreps_train_imgtrial_features.npz', 'semreps_s23_image_features.npz']
-CAP_SRC = ['semreps_train_caption_features.npz', 'semreps_s23_caption_features.npz']
+IMG_SRC = ['semreps_train_imgtrial_features.npz', 'semreps_s23_image_features.npz',
+           'semreps_s457_image_features.npz']
+CAP_SRC = ['semreps_train_caption_features.npz', 'semreps_s23_caption_features.npz',
+           'semreps_s457_caption_features.npz']
 TEST_IMG = 'semreps_test_features.npz'
 TEST_CAP = 'semreps_test_caption_features.npz'
 
