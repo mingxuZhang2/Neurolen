@@ -41,6 +41,7 @@ logger = logging.getLogger('matching')
 
 SUBJECTS = os.environ.get('SR_SUBS', 'sub-01,sub-02,sub-03,sub-04,sub-05,sub-07').split(',')
 NPERM = int(os.environ.get('SR_NPERM', '1000'))
+OUT = os.environ.get('SR_OUT', 'matching_results.json')  # CLIP run overrides this
 LAYERS = E.LAYERS
 GRAD = E.GRAD
 N_PCA = E.N_PCA
@@ -213,7 +214,7 @@ def main():
     out = {'note': 'cell=(withinV,xferVtoL,withinL,xferLtoV). xfer>0 => shared cross-modal code',
            'nperm': NPERM, 'per_subject': {}, 'permutation': {}}
     # resume: reuse already-computed subjects from a prior (possibly cancelled) run
-    ckpt = RES / 'matching_results.json'
+    ckpt = RES / OUT
     done = set()
     if ckpt.exists():
         prev = json.load(open(ckpt))
@@ -245,8 +246,8 @@ def main():
         out['permutation'][sub] = perm
         # checkpoint after EACH subject (cluster scancel-resilient): persist partial results
         out['across_subject'] = across_subject_stats(per_sub)
-        json.dump(out, open(RES / 'matching_results.json', 'w'), indent=2)
-        logger.info(f'  [checkpoint] saved {len(per_sub)} subject(s) -> matching_results.json')
+        json.dump(out, open(RES / OUT, 'w'), indent=2)
+        logger.info(f'  [checkpoint] saved {len(per_sub)} subject(s) -> {OUT}')
 
     stats = across_subject_stats(per_sub)
     out['across_subject'] = stats
@@ -257,8 +258,8 @@ def main():
                     f'withinL={rec["withinL"]:+.3f} xferL->V={rec["xferLV"]:+.3f} '
                     f'(vs0 p={rec.get("xferLV_vs0_p", float("nan")):.3f})')
 
-    json.dump(out, open(RES / 'matching_results.json', 'w'), indent=2)
-    logger.info(f'\nSaved {RES / "matching_results.json"}')
+    json.dump(out, open(RES / OUT, 'w'), indent=2)
+    logger.info(f'\nSaved {RES / OUT}')
     logger.info('Done')
 
 

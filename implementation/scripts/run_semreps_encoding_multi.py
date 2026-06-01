@@ -30,8 +30,10 @@ logger = logging.getLogger('enc_multi')
 
 SEMREPS_DIR = Path('/hpc2hdd/home/mzhang630/data/semreps')
 RES = SEMREPS_DIR
-LAYERS = [0, 4, 8, 12, 14, 16, 20, 24, 31]
-HEMI = 'left'
+# Feature set / hemisphere are env-overridable so the same pipeline runs on LLaVA
+# (default), a CLIP baseline (SR_LAYERS=0 + clip_*.npz), or the right hemisphere.
+LAYERS = [int(x) for x in os.environ.get('SR_LAYERS', '0,4,8,12,14,16,20,24,31').split(',')]
+HEMI = os.environ.get('SR_HEMI', 'left')
 SUBJECTS = os.environ.get('SR_SUBS', 'sub-01,sub-02,sub-03').split(',')
 N_PCA = 512
 ALPHAS = [1e2, 1e3, 1e4, 1e5]
@@ -46,12 +48,14 @@ ROI_GROUPS = {
 GRAD = ['early_visual', 'ventral_visual', 'lateral_temporal', 'parietal_assoc', 'language_ifg']
 
 # image-feature and caption-feature sources (each: coco_ids + layer_{L})
-IMG_SRC = ['semreps_train_imgtrial_features.npz', 'semreps_s23_image_features.npz',
-           'semreps_s457_image_features.npz']
-CAP_SRC = ['semreps_train_caption_features.npz', 'semreps_s23_caption_features.npz',
-           'semreps_s457_caption_features.npz']
-TEST_IMG = 'semreps_test_features.npz'
-TEST_CAP = 'semreps_test_caption_features.npz'
+IMG_SRC = os.environ.get('SR_IMG_SRC', 'semreps_train_imgtrial_features.npz,'
+                         'semreps_s23_image_features.npz,'
+                         'semreps_s457_image_features.npz').split(',')
+CAP_SRC = os.environ.get('SR_CAP_SRC', 'semreps_train_caption_features.npz,'
+                         'semreps_s23_caption_features.npz,'
+                         'semreps_s457_caption_features.npz').split(',')
+TEST_IMG = os.environ.get('SR_TEST_IMG', 'semreps_test_features.npz')
+TEST_CAP = os.environ.get('SR_TEST_CAP', 'semreps_test_caption_features.npz')
 
 
 def load_annot():
