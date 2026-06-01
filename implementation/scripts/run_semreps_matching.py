@@ -212,7 +212,23 @@ def main():
     per_sub, perms = [], {}
     out = {'note': 'cell=(withinV,xferVtoL,withinL,xferLtoV). xfer>0 => shared cross-modal code',
            'nperm': NPERM, 'per_subject': {}, 'permutation': {}}
+    # resume: reuse already-computed subjects from a prior (possibly cancelled) run
+    ckpt = RES / 'matching_results.json'
+    done = set()
+    if ckpt.exists():
+        prev = json.load(open(ckpt))
+        if prev.get('nperm') == NPERM:
+            for s, d in prev.get('per_subject', {}).items():
+                res = {g: {int(L): tuple(d[g][L]) for L in d[g]} for g in d}
+                per_sub.append(res); done.add(s)
+                out['per_subject'][s] = d
+                out['permutation'][s] = prev.get('permutation', {}).get(s, {})
+            if done:
+                logger.info(f'RESUME: reusing {sorted(done)} from checkpoint')
     for sub in SUBJECTS:
+        if sub in done:
+            logger.info(f'\n########## {sub} (already done, skip) ##########')
+            continue
         logger.info(f'\n################## {sub} ##################')
         res, perm = run_subject(sub, img_seen, img_mats, cap_seen, cap_mats,
                                 test_img, test_cap, te_ids, roi_vert, rng)
@@ -227,6 +243,10 @@ def main():
         perms[sub] = perm
         out['per_subject'][sub] = {g: {str(L): list(res[g][L]) for L in res[g]} for g in res}
         out['permutation'][sub] = perm
+        # checkpoint after EACH subject (cluster scancel-resilient): persist partial results
+        out['across_subject'] = across_subject_stats(per_sub)
+        json.dump(out, open(RES / 'matching_results.json', 'w'), indent=2)
+        logger.info(f'  [checkpoint] saved {len(per_sub)} subject(s) -> matching_results.json')
 
     stats = across_subject_stats(per_sub)
     out['across_subject'] = stats
