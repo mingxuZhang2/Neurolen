@@ -35,7 +35,8 @@ IMG_SRC = ['semreps_train_imgtrial_features.npz', 'semreps_s23_image_features.np
            'semreps_s457_image_features.npz']
 CAP_SRC = ['semreps_train_caption_features.npz', 'semreps_s23_caption_features.npz',
            'semreps_s457_caption_features.npz']
-CAP_TXT = ['train_captions.json', 's23_new_caption_text.json', 's457_new_caption_text.json']
+CAP_TXT = ['train_captions.json', 's23_new_caption_text.json', 's457_new_caption_text.json',
+           'test_captions.json']  # test captions live in their own file
 
 
 def union_ids(srcs):
@@ -105,8 +106,10 @@ def main():
         out, kept = [], []
         for s in range(0, len(ids), 256):
             chunk = ids[s:s + 256]
-            txts = [cap_txt[c] for c in chunk if c in cap_txt]
             ck = [c for c in chunk if c in cap_txt]
+            txts = [cap_txt[c] for c in ck]
+            if not txts:
+                continue
             tok = proc(text=txts, return_tensors='pt', padding=True, truncation=True).to(DEVICE)
             feat = model.get_text_features(**tok).float().cpu().numpy()
             out.append(feat); kept.extend(ck)
